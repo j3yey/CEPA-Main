@@ -1,0 +1,53 @@
+h1{
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 7px;
+  font-weight: bold;
+  font-size: 30px;
+}
+hr{
+  align-items: center;
+   margin-left: 40px;
+   margin-right: 40px;
+   display: flex;
+}
+
+table {
+  display: inline-table;
+  border-radius: 20px;
+  width: 90%;
+  margin-top: 8vh;
+  margin-left: 65px;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #e6e6e6; 
+}
+
+.send-invitation-button {
+  padding: 10px 20px;
+  font-size: 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 37vh;
+  width:150px;
+  margin-top:20px;
+  margin-bottom: -20px;
+  float: right;
+  margin-right: 40px;
+}

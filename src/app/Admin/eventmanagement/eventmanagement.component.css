@@ -1,0 +1,62 @@
+.heading{
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 7px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.container {
+    --box-per-row: 4;
+    --gap: 75px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: var(--gap);
+    padding: 40px 108px 0 130px;
+    width: fit-content;
+}
+
+.box, .box1, .box2, .box3, .box4, .box5 {
+    position: relative;
+    box-shadow: 5px 6px 7px 1px #afadad;
+    border-radius: 20px;
+    max-width: 360px;
+    min-width: 360px;
+    height: 200px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    width: calc(25% - var(--gap)); /* Adjust width to include the gap */
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width:100px;
+    box-shadow: 5px 6px 7px 1px #afadad;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.addevent{
+    z-index: 1;
+    padding: 10px 20px;
+    font-size: .9rem;
+    background-color: #007bff; 
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width:150px;
+    margin-left: 2.6rem;
+    margin-top:20px;
+    box-shadow: 5px 6px 7px 1px #afadad;
+}

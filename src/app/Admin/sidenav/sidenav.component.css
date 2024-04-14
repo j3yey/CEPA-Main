@@ -1,0 +1,116 @@
+mat-sidenav-container {
+    height: calc(100vh - 64px); 
+}
+
+mat-sidenav-content{
+  background-color: #e4e9f7;
+}
+mat-sidenav-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('/assets/images/logo/CEPALogo-removebg-preview.png');
+  background-size: 25% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+mat-sidenav {
+    width: 300px;
+    background-color: whitesmoke;
+}
+.mat-mdc-list-base {
+  display: block;
+  height: 85vh;
+}
+.side-toggle{
+    font-size: 1.5rem; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; cursor: 
+    pointer; 
+    margin-right: 10px;
+    margin-left: -10px;
+}
+.datetime-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding: 0.5rem;
+}
+
+.datetime-container i {
+     font-size: 1.4rem; 
+     margin-right: 0.5rem;
+}
+
+.mat-sidenav-content {
+     flex: 1;
+     overflow-y: auto;
+}
+.mat-sidenav {
+    width: 300px;
+    background-color: whitesmoke;
+  }
+  
+.side-nav-content {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0%;
+  }
+  
+.nav-list-item {
+    color: #fff;
+    min-height: fit-content;
+    width: auto;
+    display: flex;
+    align-items: center;
+    transition: 0.2s linear;
+}
+
+.nav-list-item:hover,
+.logout-item:hover {
+  background-color: #4070f4;
+  border-radius: 8px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.nav-list-item i {
+    font-size: 1.3rem;
+    width: 30px;
+    height: 25px;
+    margin-right: 10px;
+    margin-left: 5px;
+    text-align: center;
+    align-content: center;
+  }
+  
+.nav-list-item span {
+    margin-left: 10px;
+    width: 170px;
+    text-transform: capitalize;
+}
+
+.hr{
+  margin-top: 310px;
+}
+.logout-item {
+  position: absolute;
+  bottom: 5px;
+  width: 96%;
+  transition: 0.2s linear;
+}
+
+hr{
+  position: absolute;
+  bottom: 52px;
+  align-items: center;
+  text-align: center;
+  width: 85%; 
+  margin: 0 15% 0 7%;
+}

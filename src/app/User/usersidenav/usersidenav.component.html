@@ -1,0 +1,42 @@
+<mat-toolbar>
+    <button mat-button (click)="opened = !opened" class="side-nav-tbutton" style="border: none; background-color: whitesmoke;">
+      <i class="fa-solid fa-bars-staggered side-toggle"></i>
+    </button>  
+    <img src="assets/images/CEPAlogo2-removebg-preview.png" style="max-width: 80%; max-height: 80%; margin-bottom: 8px;" alt="CEPAnav">
+    <div class="datetime-container">
+      <i class="fa-regular fa-calendar"></i>
+      <span>{{ currentDateTime | date: 'EEEE, MMM d, y, h:mm a' }}</span>
+  </div>
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav [opened]="opened ? 'true' : 'false'" mode="side">
+      
+        <mat-list class="side-nav-contet nav-list" (click)="navigateToHome()">
+          <mat-list-item class="nav-list-item" >
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          </mat-list-item>
+          <mat-list-item class="nav-list-item" >
+            <i class="fa-regular fa-calendar-days"></i>
+            <span>Search Participant</span>
+          </mat-list-item>
+          <mat-list-item class="nav-list-item" >
+            <i class="fa-solid fa-users"></i>
+            <span>Feedback</span>
+          </mat-list-item>
+          <!-- <mat-list-item class="nav-list-item" (click)="()">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <span>Send E-mail</span>
+          </mat-list-item>
+          <mat-list-item class="nav-list-item" (click)="()">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>About Us</span>
+          </mat-list-item> -->
+        </mat-list>
+  
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
