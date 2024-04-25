@@ -44,24 +44,18 @@
 
     // Handle requests based on HTTP method
     switch($_SERVER['REQUEST_METHOD']){
+        // Pull records from the database
         // Handle GET requests
         case 'GET':
             switch($request[0]){
-                case 'employees':
-                    // Return JSON-encoded data for getting employees
-                    if(count($request)>1){
-                        echo json_encode($get->get_employees($request[1]));
-                    }
-                    else{
-                        echo json_encode($get->get_employees());
-                    }
-                    break;
-                
-                case 'jobs':
-                    // Return JSON-encoded data for getting jobs
-                    echo json_encode($get->get_jobs());
-                    break;
-                
+                case "getchefs":
+                    echo json_encode($get->get_chefs());
+                break;
+
+                case "getposition":
+                    echo json_encode($get->get_position());
+                break;
+
                 default:
                     // Return a 403 response for unsupported requests
                     echo "This is forbidden";
@@ -69,6 +63,8 @@
                     break;
             }
             break;
+
+            
         // Handle POST requests    
         case 'POST':
             // Retrieves JSON-decoded data from php://input using file_get_contents

@@ -1,24 +1,5 @@
 <?php
-/**
- * Get Class
- *
- * This PHP class provides methods for retrieving data related to employees and jobs.
- *
- * Usage:
- * 1. Include this class in your project.
- * 2. Create an instance of the class to access the provided methods.
- * 3. Call the appropriate method to retrieve the desired data.
- *
- * Example Usage:
- * ```
- * $get = new Get();
- * $employeesData = $get->get_employees();
- * $jobsData = $get->get_jobs();
- * ```
- *
- * Note: Customize the methods as needed to fetch data from your actual data source (e.g., database, API).
- */
-
+// Retrieving records from database
 require_once "global.php";
 
 class Get extends GlobalMethods{
@@ -71,28 +52,13 @@ class Get extends GlobalMethods{
         return $this->sendPayload(null, "failed", "Failed to retrieve records.", $result['code']);
     }
 
-
-    /**
-     * Retrieve a list of employees.
-     *
-     * @return string
-     *   A string representing the list of employees.
-     */
-    public function get_employees($id=null){
-        $condition = null;
-        if($id != null){
-            $condition = "EMPLOYEE_ID=$id";
-        }
-        return $this->get_records("employees", $condition);
+    public function get_chefs() {
+        //$sqlString = "SELECT id, fname, lname, position FROM chefs_tbl";
+        $response = $this->get_records('chefs_tbl', null);
     }
 
-    /**
-     * Retrieve a list of jobs.
-     *
-     * @return string
-     *   A string representing the list of jobs.
-     */
-    public function get_jobs(){
-        return "This is my list of jobs";
+    public function get_position() {
+        $response = "fsdfsd";
+        return $response;
     }
 }
