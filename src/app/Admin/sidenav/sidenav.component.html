@@ -1,21 +1,12 @@
-<mat-toolbar>
-  <button mat-button (click)="opened = !opened" class="side-nav-tbutton" style="border: none; background-color: whitesmoke;">
-    <i class="fa-solid fa-bars-staggered side-toggle"></i>
-  </button>  
-  <img src="assets/images/CEPAlogo2-removebg-preview.png" style="max-width: 80%; max-height: 80%; margin-bottom: 8px;" alt="CEPAnav">
-  <div class="datetime-container">
-    <i class="fa-regular fa-calendar"></i>
-    <span>{{ currentDateTime | date: 'EEEE, MMM d, y, h:mm a' }}</span>
-</div>
-</mat-toolbar>
 <mat-sidenav-container>
+
   <mat-sidenav [opened]="opened ? 'true' : 'false'" mode="side">
-    
+    <img src="assets/images/CEPAlogo2-removebg-preview.png" class="logo" alt="CEPAnav">
       <mat-list class="side-nav-contet nav-list">
         <mat-list-item class="nav-list-item" (click)="navigateToHome()">
           <i class="fa-solid fa-house"></i>
           <span>Home</span>
-        </mat-list-item>
+        </mat-list-item>  
         <mat-list-item class="nav-list-item" (click)="navigateToEventManagement()">
           <i class="fa-regular fa-calendar-days"></i>
           <span>Event Management</span>
@@ -43,6 +34,15 @@
 
   </mat-sidenav>
   <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-button (click)="opened = !opened" class="side-nav-tbutton" style="border: none; background-color: whitesmoke;">
+        <i class="fa-solid fa-bars-staggered side-toggle"></i>
+      </button>  
+      <div class="datetime-container">
+        <i class="fa-regular fa-calendar"></i>
+        <span>{{ currentDateTime | date: 'EEEE, MMM d, y, h:mm a' }}</span>
+    </div>
+    </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

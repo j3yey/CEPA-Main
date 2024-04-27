@@ -1,8 +1,9 @@
 mat-sidenav-container {
-    height: calc(100vh - 64px); 
+  height: 100vh;
 }
 
 mat-sidenav-content{
+  overflow-y: auto;
   background-color: #e4e9f7;
 }
 mat-sidenav-content::before {
@@ -24,6 +25,16 @@ mat-sidenav {
     width: 300px;
     background-color: whitesmoke;
 }
+
+.logo{
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
 .mat-mdc-list-base {
   display: block;
   height: 85vh;
@@ -113,4 +124,10 @@ hr{
   text-align: center;
   width: 85%; 
   margin: 0 15% 0 7%;
+}
+
+@media screen and (max-width: 768px) {
+  mat-sidenav {
+    width: 0 !important;
+  }
 }
