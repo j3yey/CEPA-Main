@@ -87,9 +87,9 @@
                     echo json_encode($post->delete_employee($request[1]));
                     break;
                 
-                case 'addjob':
+                case 'attendance':
                     // Return JSON-encoded data for adding jobs
-                    echo json_encode($post->add_jobs($data));
+                    echo json_encode($post->attendance_submit($data));
                     break;
                 
                 default:

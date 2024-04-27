@@ -34,7 +34,12 @@ export class UsersidenavComponent {
   navigateToHome() {
     this.router.navigate(['user/userhome']);
   }
-
+  navigateToSearchParticipant() {
+    this.router.navigate(['user/searchparticipant']);
+  }
+  navigateToFeedback() {
+    this.router.navigate(['user/feedback']);
+  }
 
   ngOnInit(): void {    
     setInterval(() => {

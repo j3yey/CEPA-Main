@@ -125,6 +125,7 @@ class Post extends GlobalMethods{
      * @return array|object
      *   The added job data.
      */
+
     public function add_jobs($data){
         $sql = "INSERT INTO jobs(EMPLOYEE_ID,FIRST_NAME,
         LAST_NAME,EMAIL,PHONE_NUMBER,HIRE_DATE,JOB_ID,SALARY,DEPARTMENT_ID) 
@@ -154,5 +155,33 @@ class Post extends GlobalMethods{
         }
        
         return $this->sendPayload(null, "failed", $errmsg, 200);
+    }
+
+    public function attendance_submit($data){
+        $sql = "INSERT INTO attendance(id, l_name, f_name , address, email, p_number) 
+        VALUES (?,?,?,?,?,?)";
+        try{
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute(
+                [
+                    $data->id,
+                    $data->l_name,
+                    $data->f_name,
+                    $data->address,
+                    $data->email,
+                    $data->p_number,
+                  
+                ]
+            );
+            return $this->sendPayload(null, "success", "Successfully created a new record.", 200);
+    
+        }
+        catch(\PDOException $e){
+            $errmsg = $e->getMessage();
+            $code = 400;
+        }
+       
+        return $this->sendPayload(null, "failed", $errmsg, 200);
+        
     }
 }

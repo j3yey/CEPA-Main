@@ -10,6 +10,8 @@ import { RegisterComponent } from './register/register.component';
 import { MailerComponent } from './Admin/mailer/mailer.component';
 import { UserhomeComponent } from './User/userhome/userhome.component';
 import { UsersidenavComponent } from './User/usersidenav/usersidenav.component';
+import { SearchparticipantComponent } from './User/searchparticipant/searchparticipant.component';
+import { FeedbackComponent } from './User/feedback/feedback.component';
 
 
 export const routes: Routes = [
@@ -39,6 +41,14 @@ export const routes: Routes = [
       {
         path: 'userhome',
         component: UserhomeComponent,
+      },
+      {
+        path: 'searchparticipant',
+        component: SearchparticipantComponent,
+      },
+      {
+        path: 'feedback',
+        component: FeedbackComponent,
       },
     ]
   },

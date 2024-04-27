@@ -45,18 +45,29 @@
     bottom: 20px;
     right: 20px;
 }
-.addevent{
-    z-index: 1;
-    padding: 10px 20px;
-    font-size: .9rem;
-    background-color: #007bff; 
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Adjust as needed */
+    margin-left: 130px;
+    width: 500px;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-right: 10px; /* Adjust as needed */
+    width: 500px; /* Adjust width as needed */
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 7px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width:150px;
-    margin-left: 2.6rem;
-    margin-top:20px;
-    box-shadow: 5px 6px 7px 1px #afadad;
 }
