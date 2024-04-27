@@ -29,27 +29,33 @@ export class SidenavComponent implements OnInit {
   title = 'CEPA';
   opened: boolean = true;
   currentDateTime: Date = new Date();
+  selectedNavItem: string = '';
 
   constructor(private router: Router) { }
 
   navigateToHome() {
     this.router.navigate(['admin/home']);
+    this.selectedNavItem = 'home';
   }
 
   navigateToEventManagement() {
     this.router.navigate(['admin/eventmanagement']);
+    this.selectedNavItem = 'eventmanagement';
   }
   
   navigateToParticipantManagement() {
     this.router.navigate(['admin/participantmanagement']);
+    this.selectedNavItem = 'participantmanagement';
   }
 
   navigateToMailer() {
     this.router.navigate(['admin/mailer']);
+    this.selectedNavItem = 'mailer';
   }
   
   navigateToAboutUs() {
     this.router.navigate(['admin/AboutUs']);
+    this.selectedNavItem = 'AboutUs';
   }
 
   redirectToAdminLogin() {

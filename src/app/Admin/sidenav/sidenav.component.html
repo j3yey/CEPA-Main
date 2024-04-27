@@ -2,24 +2,28 @@
 
   <mat-sidenav [opened]="opened ? 'true' : 'false'" mode="side">
     <img src="assets/images/CEPAlogo2-removebg-preview.png" class="logo" alt="CEPAnav">
-      <mat-list class="side-nav-contet nav-list">
-        <mat-list-item class="nav-list-item" (click)="navigateToHome()">
+      <mat-list class="side-nav-contet nav-list"> 
+        <mat-list-item class="nav-list-item" (click)="navigateToHome(); selectedNavItem = 'home'" [ngClass]="selectedNavItem === 'home' ? 'selected' : ''">
           <i class="fa-solid fa-house"></i>
           <span>Home</span>
-        </mat-list-item>  
-        <mat-list-item class="nav-list-item" (click)="navigateToEventManagement()">
+        </mat-list-item>
+        
+        <mat-list-item class="nav-list-item" (click)="navigateToEventManagement(); selectedNavItem = 'event-management'" [ngClass]="selectedNavItem === 'event-management' ? 'selected' : ''">
           <i class="fa-regular fa-calendar-days"></i>
           <span>Event Management</span>
         </mat-list-item>
-        <mat-list-item class="nav-list-item" (click)="navigateToParticipantManagement()">
+        
+        <mat-list-item class="nav-list-item" (click)="navigateToParticipantManagement(); selectedNavItem = 'participant-management'" [ngClass]="selectedNavItem === 'participant-management' ? 'selected' : ''">
           <i class="fa-solid fa-users"></i>
           <span>Participant Management</span>
         </mat-list-item>
-        <mat-list-item class="nav-list-item" (click)="navigateToMailer()">
+        
+        <mat-list-item class="nav-list-item" (click)="navigateToMailer(); selectedNavItem = 'mailer'" [ngClass]="selectedNavItem === 'mailer' ? 'selected' : ''">
           <i class="fa fa-envelope" aria-hidden="true"></i>
           <span>Send E-mail</span>
         </mat-list-item>
-        <mat-list-item class="nav-list-item" (click)="navigateToAboutUs()">
+        
+        <mat-list-item class="nav-list-item" (click)="navigateToAboutUs(); selectedNavItem = 'about-us'" [ngClass]="selectedNavItem === 'about-us' ? 'selected' : ''">
           <i class="fa-solid fa-circle-info"></i>
           <span>About Us</span>
         </mat-list-item>
