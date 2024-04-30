@@ -7,7 +7,7 @@ class GlobalMethods{
         return array(
             "status"=>$status,
             "payload"=>$data,
-            "prepared_by"=>"BURAT",
+            "prepared_by"=>"CEPA",
             "timestamp"=>date_create()
         );
     }

@@ -6,13 +6,12 @@ import { EventmanagementComponent } from './Admin/eventmanagement/eventmanagemen
 import { AboutusComponent } from './Admin/aboutus/aboutus.component';
 import { LoginComponent } from './Admin/login/login.component';
 import { SidenavComponent } from './Admin/sidenav/sidenav.component';
-import { RegisterComponent } from './register/register.component';
 import { MailerComponent } from './Admin/mailer/mailer.component';
 import { UserhomeComponent } from './User/userhome/userhome.component';
 import { UsersidenavComponent } from './User/usersidenav/usersidenav.component';
 import { SearchparticipantComponent } from './User/searchparticipant/searchparticipant.component';
 import { FeedbackComponent } from './User/feedback/feedback.component';
-
+import { AttendanceComponent } from './attendance/attendance.component';
 
 export const routes: Routes = [
   {
@@ -26,8 +25,8 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'register',
-    component: RegisterComponent,
+    path: 'attendanceform',
+    component: AttendanceComponent,
   },
   {
     path: '',

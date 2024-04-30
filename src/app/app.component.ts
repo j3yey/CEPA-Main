@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from './Admin/login/login.component';
 import { SidenavComponent } from './Admin/sidenav/sidenav.component';
-import { RegisterComponent } from './register/register.component';
 
 
 @Component({
@@ -27,7 +26,6 @@ import { RegisterComponent } from './register/register.component';
     CommonModule,
     LoginComponent,
     SidenavComponent,
-    RegisterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

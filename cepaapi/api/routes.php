@@ -9,53 +9,64 @@
  * 1. Include this script in your project.
  * 2. Define resource-specific logic in the 'get.php' and 'post.php' modules.
  * 3. Send requests to the appropriate endpoints defined in the 'switch' cases below.
- *
- * Example Usage:
- * - API_URL: http://localhost/demoproject/api
- * - GET request for employees: API_URL/employees
- * - GET request for jobs: API_URL/jobs
- * - POST request for adding employees: API_URL/addemployee (with JSON data in the request body)
- * - POST request for adding jobs: API_URL/addjob (with JSON data in the request body)
- *
  */
 
+    // Allow requests from any origin
+    header('Access-Control-Allow-Origin: *');
+    
+    // Allow specific HTTP methods
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+    
+    // Allow specific headers
+    header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization');
+    
+    // Handle preflight requests
+    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+            header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    
+        if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+            header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+    
+        exit(0);
+    }
+    
     // Include required modules
     require_once "./modules/get.php";
     require_once "./modules/post.php";
     require_once "./config/database.php";
-
+    
     $con = new Connection();
     $pdo = $con->connect();
-
+    
     // Initialize Get and Post objects
     $get = new Get($pdo);
     $post = new Post($pdo);
-
+    
     // Check if 'request' parameter is set in the request
-    if(isset($_REQUEST['request'])){
-         // Split the request into an array based on '/'
+    if (isset($_REQUEST['request'])) {
+        // Split the request into an array based on '/'
         $request = explode('/', $_REQUEST['request']);
-    }
-    else{
-         // If 'request' parameter is not set, return a 404 response
+    } else {
+        // If 'request' parameter is not set, return a 404 response
         echo "Not Found";
         http_response_code(404);
+        exit();
     }
-
+    
     // Handle requests based on HTTP method
-    switch($_SERVER['REQUEST_METHOD']){
-        // Pull records from the database
+    switch ($_SERVER['REQUEST_METHOD']) {
         // Handle GET requests
         case 'GET':
-            switch($request[0]){
+            switch ($request[0]) {
                 case "getchefs":
                     echo json_encode($get->get_chefs());
-                break;
-
+                    break;
+    
                 case "getposition":
                     echo json_encode($get->get_position());
-                break;
-
+                    break;
+    
                 default:
                     // Return a 403 response for unsupported requests
                     echo "This is forbidden";
@@ -63,13 +74,12 @@
                     break;
             }
             break;
-
-            
-        // Handle POST requests    
+    
+        // Handle POST requests
         case 'POST':
             // Retrieves JSON-decoded data from php://input using file_get_contents
             $data = json_decode(file_get_contents("php://input"));
-            switch($request[0]){
+            switch ($request[0]) {
                 case 'addemployee':
                     // Return JSON-encoded data for adding employees
                     echo json_encode($post->add_employees($data));
@@ -78,16 +88,20 @@
                     // Return JSON-encoded data for adding employees
                     echo json_encode($post->edit_employee($data, $request[1]));
                     break;
-                
+    
                 case 'deleteemployee':
                     echo json_encode($post->delete_employee($request[1]));
                     break;
-                
-                case 'attendance':
+    
+                case 'addjob':
                     // Return JSON-encoded data for adding jobs
-                    echo json_encode($post->attendance_submit($data));
+                    echo json_encode($post->add_jobs($data));
                     break;
-                
+    
+                case 'attendance': // Handle attendance request
+                    echo json_encode($post->submit_attendance($data)); // Call method to submit attendance
+                    break;
+    
                 default:
                     // Return a 403 response for unsupported requests
                     echo "This is forbidden";
@@ -95,11 +109,12 @@
                     break;
             }
             break;
+    
         default:
             // Return a 404 response for unsupported HTTP methods
             echo "Method not available";
             http_response_code(404);
-        break;
+            break;
     }
 
 ?>
