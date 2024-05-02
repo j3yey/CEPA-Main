@@ -151,7 +151,6 @@ class Post extends GlobalMethods{
     
         // Debug autoload
         $mail = new PHPMailer(true);
-        $mail->SMTPDebug = SMTP::DEBUG_CONNECTION; // Enable debugging
     
         try {
             // Configure SMTP settings
