@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Sender</title>
-    <link rel="stylesheet" href="mailer.component.css">
 </head>
 <body>
     <div class="container">
         <h1>Send Invitation</h1>
-        <form action="#" method="post">
+        <form (submit)="sendEmail()">
             <label for="email">Recipient Email:</label>
-            <input type="text" id="email" name="email" required>
+            <input type="email" id="email" name="email" required [(ngModel)]="recipientEmail">
             <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" required>
+            <input type="text" id="subject" name="subject" required [(ngModel)]="emailSubject">
             <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <textarea id="message" name="message" rows="5" required [(ngModel)]="emailMessage"></textarea>
             <input type="submit" value="Send Email">
         </form>
+        <div *ngIf="emailSent">{{ emailMessage }}</div>
+        <div *ngIf="emailError">{{ emailErrorMessage }}</div>
     </div>
 </body>
 </html>
-

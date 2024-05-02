@@ -1,8 +1,17 @@
 <?php
+// Add CORS headers
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // POST <ethod
-
 require_once "global.php"; 
+require_once 'C:/xampp/htdocs/CEPA-Main/CEPA-Main/vendor/autoload.php';
+
+// Import PHPMailer classes
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class Post extends GlobalMethods{
     private $pdo;
@@ -12,7 +21,6 @@ class Post extends GlobalMethods{
     }
     
    
-
     /**
      * Add a new employee with the provided data.
      *
@@ -22,6 +30,7 @@ class Post extends GlobalMethods{
      * @return array|object
      *   The added employee data.
      */
+
     public function add_employees($data){
         $sql = "INSERT INTO employees(EMPLOYEE_ID,FIRST_NAME,
         LAST_NAME,EMAIL,PHONE_NUMBER,HIRE_DATE,JOB_ID,SALARY,DEPARTMENT_ID) 
@@ -134,4 +143,58 @@ class Post extends GlobalMethods{
        
         return $this->sendPayload(null, "failed", $errmsg, 200);
     }
+    public function sendEmail($data){
+        // Check if $data is null
+        if ($data === null) {
+            return ['success' => false, 'message' => 'Data is null'];
+        }
+    
+        // Debug autoload
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = SMTP::DEBUG_CONNECTION; // Enable debugging
+    
+        try {
+            // Configure SMTP settings
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                       //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'cepa.appdev@gmail.com';                //SMTP username
+            $mail->Password   = 'iiot dgrb rlxw mcas';                  //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+            // Set email content
+            $mail->setFrom('cepa.appdev@gmail.com', 'CEPA');
+    
+            // Check if $data->to is set
+            if (isset($data->to)) {
+                $mail->addAddress($data->to);
+            } else {
+                return ['success' => false, 'message' => 'Recipient email is not provided'];
+            }
+    
+            // Check if $data->subject is set
+            if (isset($data->subject)) {
+                $mail->Subject = $data->subject;
+            } else {
+                return ['success' => false, 'message' => 'Email subject is not provided'];
+            }
+    
+            // Check if $data->message is set
+            if (isset($data->message)) {
+                $mail->Body = $data->message;
+            } else {
+                return ['success' => false, 'message' => 'Email message is not provided'];
+            }
+    
+            $mail->isHTML(true);
+    
+            // Send email
+            $mail->send();
+    return ['success' => true, 'message' => 'Email sent successfully'];
+} catch (Exception $e) {
+    return ['success' => false, 'message' => 'Failed to send email: ' . $mail->ErrorInfo];
+}
+    }
+    
 }

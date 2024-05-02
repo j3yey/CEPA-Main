@@ -18,6 +18,17 @@
  * - POST request for adding jobs: API_URL/addjob (with JSON data in the request body)
  *
  */
+    
+    // Add CORS headers
+    header("Access-Control-Allow-Origin: http://localhost:4200");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+    // Handle preflight requests
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        http_response_code(200);
+        exit();
+    }
 
     // Include required modules
     require_once "./modules/get.php";
@@ -86,6 +97,11 @@
                 case 'addjob':
                     // Return JSON-encoded data for adding jobs
                     echo json_encode($post->add_jobs($data));
+                    break;
+
+                case 'sendemail':
+                    // Call the sendEmail method of the Post class
+                    echo json_encode($post->sendEmail($data));
                     break;
                 
                 default:
