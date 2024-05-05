@@ -79,6 +79,11 @@
                     // Return JSON-encoded data for adding employees
                     echo json_encode($post->submit_feedback($data));
                     break;
+
+                case 'sendemail':
+                        // Call the sendEmail method of the Post class
+                        echo json_encode($post->sendEmail($data));
+                        break;
                 
                 default:
                     // Return a 403 response for unsupported requests
