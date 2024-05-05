@@ -12,6 +12,7 @@ import { UsersidenavComponent } from './User/usersidenav/usersidenav.component';
 
 import { FeedbackComponent } from './User/feedback/feedback.component';
 import { RegisterComponent } from './register/register.component';
+import { SearchparticipantComponent } from './User/searchparticipant/searchparticipant.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
         path: 'userhome',
         component: UserhomeComponent,
+      },
+      {
+        path: 'searchparticipant',
+        component: SearchparticipantComponent,
       },
       {
         path: 'feedback',
@@ -79,7 +84,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'user/userhome', // Redirect unknown paths to user home
+    redirectTo: 'user/userhome', 
   },
 ];
   

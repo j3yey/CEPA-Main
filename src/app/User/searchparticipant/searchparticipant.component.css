@@ -1,0 +1,46 @@
+.participantname {
+    margin-left:20px
+    }
+    body{
+        margin-left:20px
+    }
+    
+    .heading{
+        font-size: 40px;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-bottom:20px;
+        font-weight: bold;
+    
+    }
+    .search-bar1 {
+        border-radius: 5px;
+        width: 1000px; /* Adjust the width as needed */
+        height: 20px; /* Adjust the height as needed */
+        font-size: 18px;
+        padding: 10px;
+        background-color: white; 
+        margin-top:30px;
+        margin-bottom:30px;
+        
+    }
+    .search-bar2 {
+        border-radius: 5px;
+        width: 1000px; /* Adjust the width as needed */
+        height: 20px; /* Adjust the height as needed */
+        font-size: 18px;
+        padding: 10px;
+        background-color: white; 
+        margin-top:10px;
+        margin-bottom:30px;
+    }
+    .search-bar3 {
+        border-radius: 5px;
+        width: 1000px; /* Adjust the width as needed */
+        height: 20px; /* Adjust the height as needed */
+        font-size: 18px;
+        padding: 10px;
+        background-color: white; 
+        margin-top:10px;
+        margin-bottom:30px;
+    }
