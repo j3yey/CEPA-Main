@@ -33,7 +33,7 @@ export class MailerComponent {
       message: this.emailMessage
     };
 
-    this.http.post<any>('http://localhost/CEPA-Main/CEPA-Main/cepaapi/api/sendemail', emailData)
+    this.http.post<any>('http://localhost/CEPA-Main/cepaapi/api/sendemail', emailData)
       .subscribe(
         response => {
           this.emailSent = response.success;

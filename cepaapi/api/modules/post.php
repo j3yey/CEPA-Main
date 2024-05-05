@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // POST <ethod
 require_once "global.php"; 
-require_once 'C:/xampp/htdocs/CEPA-Main/CEPA-Main/vendor/autoload.php';
+require_once 'C:/xampp/htdocs/CEPA-Main/vendor/autoload.php';
 
 // Import PHPMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
