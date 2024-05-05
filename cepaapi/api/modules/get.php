@@ -38,5 +38,23 @@ class Get extends GlobalMethods{
     }
 
     //Enter the public function below
-    
+    public function get_records($table, $condition=null){
+        $sqlString = "SELECT * FROM $table";
+        if($condition != null){
+            $sqlString .= " WHERE " . $condition;
+        }
+        
+        $result = $this->executeQuery($sqlString);
+
+        if($result['code']==200){
+            return $this->sendPayload($result['data'], "success", "Successfully retrieved records.", $result['code']);
+        }
+        
+        return $this->sendPayload(null, "failed", "Failed to retrieve records.", $result['code']);
+    }
+
+    public function get_info() {
+        $response = $this->get_records('participants', null);
+        return $response;
+    }
 }

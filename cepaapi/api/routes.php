@@ -60,6 +60,9 @@
         // Handle GET requests
         case 'GET':
             switch($request[0]){
+                case "getinfo":
+                    echo json_encode($get->get_info()); // Call the get_events() method
+                    break;
 
                 default:
                     // Return a 403 response for unsupported requests

@@ -1,28 +1,37 @@
-<html>
 <body>
   <h1>Participant Management <i class="fa fa-users" aria-hidden="true"></i></h1>
-    <hr>
-  <button class="send-invitation-button" style="box-shadow: 5px 6px 7px 1px #afadad;">Send Invitation</button>
-  <table>
-    <thead>
-      <tr>
-        <th>Participant ID</th>
-        <th>Participant Name</th>
-        <th>Event Joined</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>12345</td>
-        <td>John Doe</td>
-        <td>February 19, 2024, 12:00 PM</td>
-        <td>Registered</td>
-        <td>hehe</td>
-      </tr>
-    </tbody>
-  </table>
+  <hr>
 
+  <div class="scrollable-table">
+    <table mat-table [dataSource]="participants">
+      
+      <ng-container matColumnDef="participantId">
+        <th mat-header-cell *matHeaderCellDef> Participant ID </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.participant_id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="participantName">
+        <th mat-header-cell *matHeaderCellDef> Participant Name </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.first_name}} {{participant.last_name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phonenumber">
+        <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+        <td mat-cell *matCellDef="let participant"> +63 {{participant.phone_number}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let participant"> {{participant.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let participant"> Actions... </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['participantId', 'participantName', 'phonenumber', 'email', 'actions']"></tr>
+      <tr mat-row *matRowDef="let participant; columns: ['participantId', 'participantName', 'phonenumber', 'email', 'actions'];"></tr>
+    </table>
+  </div>
 </body>
-</html>
