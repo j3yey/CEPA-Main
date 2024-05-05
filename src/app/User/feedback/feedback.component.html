@@ -1,0 +1,74 @@
+
+<body>
+    <h1 class="heading">Feedback</h1>
+    <hr style="margin-left:15px;">
+    <div class="container">
+        <div class="question">
+            <label for="q1">Did you find events you liked on our platform?</label>
+            <div class="options">
+                <mat-radio-group [(ngModel)]="selectedQ1Answer" name="q1_answer">
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="Maybe">Maybe</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label for="q2">Would you tell others about our platform?</label>
+            <div class="options">
+                <mat-radio-group [(ngModel)]="selectedQ2Answer" name="q2_answer">
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="Maybe">Maybe</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label for="q3">Were you well-informed about upcoming events?</label>
+            <div class="options">
+                <mat-radio-group [(ngModel)]="selectedQ3Answer" name="q3_answer">
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="Maybe">Maybe</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label for="q4">Did our platform help you work with others?</label>
+            <div class="options">
+                <mat-radio-group [(ngModel)]="selectedQ4Answer" name="q4_answer">
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="Maybe">Maybe</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label for="q5">Do you want more kinds of activities on our platform?</label>
+            <div class="options">
+                <mat-radio-group [(ngModel)]="selectedQ5Answer" name="q5_answer">
+                    <mat-radio-button value="Yes">Yes</mat-radio-button>
+                    <mat-radio-button value="Maybe">Maybe</mat-radio-button>
+                    <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        
+        </div>
+ 
+        <div class="feedback-container">
+            <form #feedbackForm="ngForm">
+              
+              <mat-card>
+                <mat-card-content><textarea id="feedback" name="feedback" [(ngModel)]="feedback" placeholder="Give us your thoughts..." required></textarea></mat-card-content>
+              </mat-card>
+              <button type="submit" class="send-feedback-button" (click)="submitFeedback(feedbackForm)">Send Feedback</button>
+            </form>
+          </div>
+          
+          
+</body>

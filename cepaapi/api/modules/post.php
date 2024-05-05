@@ -1,6 +1,5 @@
 <?php
-
-// POST <ethod
+// POST Method
 
 require_once "global.php"; 
 
@@ -11,87 +10,38 @@ class Post extends GlobalMethods{
         $this->pdo = $pdo;
     }
     
-   
-
     /**
-     * Add a new employee with the provided data.
+     * Add a new with the provided data.
      *
      * @param array|object $data
-     *   The data representing the new employee.
+     *   The data representing the new.
      *
      * @return array|object
-     *   The added employee data.
+     *   The added data.
      */
-    public function add_employees($data){
-        $sql = "INSERT INTO employees(EMPLOYEE_ID,FIRST_NAME,
-        LAST_NAME,EMAIL,PHONE_NUMBER,HIRE_DATE,JOB_ID,SALARY,DEPARTMENT_ID) 
-        VALUES (?,?,?,?,?,?,?,?,?)";
-        try{
-            $statement = $this->pdo->prepare($sql);
-            $statement->execute(
-                [
-                    $data->EMPLOYEE_ID,
-                    $data->FIRST_NAME,
-                    $data->LAST_NAME,
-                    $data->EMAIL,
-                    $data->PHONE_NUMBER,
-                    $data->HIRE_DATE,
-                    $data->JOB_ID,
-                    $data->SALARY,
-                    $data->DEPARTMENT_ID
-                  
-                ]
-            );
-            return $this->sendPayload(null, "success", "Successfully created a new record.", 200);
-    
-        }
-        catch(\PDOException $e){
-            $errmsg = $e->getMessage();
-            $code = 400;
-        }
-       
-        return $this->sendPayload(null, "failed", $errmsg, $code);
-    }
 
-    public function edit_employee($data, $id){
-        $sql = "UPDATE employees SET EMAIL=? WHERE EMPLOYEE_ID = ?";
-        try{
+     //Enter the public function below
+    public function submit_feedback($data) {
+        $sql = "INSERT INTO feedback(q1_answer, q2_answer, q3_answer, q4_answer, q5_answer, feedback) 
+                VALUES (?, ?, ?, ?, ?, ?)";
+        
+        try {
             $statement = $this->pdo->prepare($sql);
-            $statement->execute(
-                [
-                  $data->EMAIL,
-                  $id
-                ]
-            );
-            return $this->sendPayload(null, "success", "Successfully updated record.", 200);
-    
+            $statement->execute([
+                $data->q1_answer,
+                $data->q2_answer,
+                $data->q3_answer,
+                $data->q4_answer,
+                $data->q5_answer,
+                $data->feedback
+            ]);
+            
+            // Return a JSON response indicating success
+            return json_encode(["status" => "success", "message" => "Successfully created a new feedback record."]);
+        } catch(\PDOException $e) {
+            // Return a JSON response indicating failure with error message
+            return json_encode(["status" => "failed", "message" => $e->getMessage()]);
         }
-        catch(\PDOException $e){
-            $errmsg = $e->getMessage();
-            $code = 400;
-        }
-       
-        return $this->sendPayload(null, "failed", $errmsg, $code);
-    }
-
-    public function delete_employee($id){
-        $sql = "DELETE FROM employees WHERE EMPLOYEE_ID = ?";
-        try{
-            $statement = $this->pdo->prepare($sql);
-            $statement->execute(
-                [
-                  $id
-                ]
-            );
-            return $this->sendPayload(null, "success", "Successfully deleted record.", 200);
-    
-        }
-        catch(\PDOException $e){
-            $errmsg = $e->getMessage();
-            $code = 400;
-        }
-       
-        return $this->sendPayload(null, "failed", $errmsg, $code);
     }
    
 
@@ -104,34 +54,8 @@ class Post extends GlobalMethods{
      * @return array|object
      *   The added job data.
      */
-    public function add_jobs($data){
-        $sql = "INSERT INTO jobs(EMPLOYEE_ID,FIRST_NAME,
-        LAST_NAME,EMAIL,PHONE_NUMBER,HIRE_DATE,JOB_ID,SALARY,DEPARTMENT_ID) 
-        VALUES (?,?,?,?,?,?,?,?,?)";
-        try{
-            $statement = $this->pdo->prepare($sql);
-            $statement->execute(
-                [
-                    $data->EMPLOYEE_ID,
-                    $data->FIRST_NAME,
-                    $data->LAST_NAME,
-                    $data->EMAIL,
-                    $data->PHONE_NUMBER,
-                    $data->HIRE_DATE,
-                    $data->JOB_ID,
-                    $data->SALARY,
-                    $data->DEPARTMENT_ID
-                  
-                ]
-            );
-            return $this->sendPayload(null, "success", "Successfully created a new record.", 200);
+
+     
+     //Enter public fuction below
     
-        }
-        catch(\PDOException $e){
-            $errmsg = $e->getMessage();
-            $code = 400;
-        }
-       
-        return $this->sendPayload(null, "failed", $errmsg, 200);
-    }
 }

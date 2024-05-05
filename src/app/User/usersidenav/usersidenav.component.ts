@@ -34,6 +34,9 @@ export class UsersidenavComponent {
   navigateToHome() {
     this.router.navigate(['user/userhome']);
   }
+  navigateToFeedback() {
+    this.router.navigate(['user/feedback']);
+  }
 
 
   ngOnInit(): void {    

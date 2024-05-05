@@ -37,28 +37,6 @@ class Get extends GlobalMethods{
         return array("code"=>$code, "errmsg"=>$errmsg);
     }
 
-    public function get_records($table, $condition=null){
-        $sqlString = "SELECT * FROM $table";
-        if($condition != null){
-            $sqlString .= " WHERE " . $condition;
-        }
-        
-        $result = $this->executeQuery($sqlString);
-
-        if($result['code']==200){
-            return $this->sendPayload($result['data'], "success", "Successfully retrieved records.", $result['code']);
-        }
-        
-        return $this->sendPayload(null, "failed", "Failed to retrieve records.", $result['code']);
-    }
-
-    public function get_chefs() {
-        //$sqlString = "SELECT id, fname, lname, position FROM chefs_tbl";
-        $response = $this->get_records('chefs_tbl', null);
-    }
-
-    public function get_position() {
-        $response = "fsdfsd";
-        return $response;
-    }
+    //Enter the public function below
+    
 }
