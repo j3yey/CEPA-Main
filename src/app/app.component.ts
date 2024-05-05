@@ -70,7 +70,6 @@ import { MatTreeModule } from '@angular/material/tree';
     CommonModule,
     LoginComponent,
     SidenavComponent,
-    RegisterComponent,
 
     //Angular Material Imports
     MatAutocompleteModule,

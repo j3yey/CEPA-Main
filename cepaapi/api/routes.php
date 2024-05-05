@@ -87,6 +87,10 @@
                         // Call the sendEmail method of the Post class
                         echo json_encode($post->sendEmail($data));
                         break;
+
+                case 'attendance': // Handle attendance request
+                    echo json_encode($post->submit_attendance($data)); // Call method to submit attendance
+                    break;
                 
                 default:
                     // Return a 403 response for unsupported requests

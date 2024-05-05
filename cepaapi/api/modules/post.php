@@ -63,7 +63,7 @@ class Post extends GlobalMethods{
 
      
      //Enter public fuction below
-     public function sendEmail($data){
+    public function sendEmail($data){
         // Check if $data is null
         if ($data === null) {
             return ['success' => false, 'message' => 'Data is null'];
@@ -116,5 +116,24 @@ class Post extends GlobalMethods{
 }
     }
     
+    public function submit_attendance($data) {
+        $sql = "INSERT INTO attendance (l_name, f_name, address, email, p_number) 
+                VALUES (?, ?, ?, ?, ?)";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([
+                $data->l_name,
+                $data->f_name,
+                $data->address,
+                $data->email,
+                $data->p_number
+            ]);
+            return $this->sendPayload(null, "success", "Successfully submitted attendance.", 200);
+        } catch(\PDOException $e) {
+            $errmsg = $e->getMessage();
+            $code = 400;
+        }
+        return $this->sendPayload(null, "failed", $errmsg, $code);
+    }
 }
 

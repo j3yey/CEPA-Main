@@ -11,6 +11,7 @@ import { UserhomeComponent } from './User/userhome/userhome.component';
 import { UsersidenavComponent } from './User/usersidenav/usersidenav.component';
 
 import { FeedbackComponent } from './User/feedback/feedback.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,10 @@ export const routes: Routes = [
     path: 'user',
     redirectTo: 'user/userhome',
     pathMatch: 'full',
+  },
+  {
+    path: 'attendanceform',
+    component: RegisterComponent,
   },
   {
     path: '',
