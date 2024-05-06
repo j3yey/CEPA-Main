@@ -31,14 +31,17 @@ export class UsersidenavComponent {
   currentDateTime: Date = new Date();
 
   constructor(private router: Router) { }
+  
   navigateToHome() {
-    this.router.navigate(['user/userhome']);
+    this.router.navigate(['/user/userhome']);
   }
+  
   navigateToSearchParticipant() {
-    this.router.navigate(['user/searchparticipant']);
+    this.router.navigate(['/user/searchparticipant']);
   }
+  
   navigateToFeedback() {
-    this.router.navigate(['user/feedback']);
+    this.router.navigate(['/user/feedback']);
   }
 
 

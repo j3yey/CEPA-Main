@@ -2,12 +2,12 @@
 
     <mat-sidenav [opened]="opened ? 'true' : 'false'" mode="side">
       <img src="assets/images/CEPAlogo2-removebg-preview.png" class="logo" alt="CEPAnav"> 
-        <mat-list class="side-nav-contet nav-list" (click)="navigateToHome()">
-          <mat-list-item class="nav-list-item" >
+        <mat-list class="side-nav-contet nav-list">
+          <mat-list-item class="nav-list-item" (click)="navigateToHome()">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
           </mat-list-item>
-          <mat-list-item class="nav-list-item" (click)="navigateToFeedback()">
+          <mat-list-item class="nav-list-item" (click)="navigateToSearchParticipant()">
             <i class="fa-regular fa-calendar-days"></i>
             <span>Search Participant</span>
           </mat-list-item>

@@ -21,6 +21,7 @@ mat-sidenav-content::before {
   z-index: -1;
 }
 
+
 mat-sidenav {
   width: 300px;
   background-color: whitesmoke;
