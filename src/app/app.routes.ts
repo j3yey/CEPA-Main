@@ -11,8 +11,8 @@ import { UserhomeComponent } from './User/userhome/userhome.component';
 import { UsersidenavComponent } from './User/usersidenav/usersidenav.component';
 
 import { FeedbackComponent } from './User/feedback/feedback.component';
-import { RegisterComponent } from './register/register.component';
 import { SearchparticipantComponent } from './User/searchparticipant/searchparticipant.component';
+import { AttendanceComponent } from './attendance/attendance.component';
 
 export const routes: Routes = [
   {
@@ -27,7 +27,7 @@ export const routes: Routes = [
   },
   {
     path: 'attendanceform',
-    component: RegisterComponent,
+    component: AttendanceComponent,
   },
   {
     path: '',
