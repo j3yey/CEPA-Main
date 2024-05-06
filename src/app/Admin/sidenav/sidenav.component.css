@@ -35,10 +35,6 @@ mat-sidenav-content {
   width: 70%;
 }
 
-.mat-mdc-list-base {
-  overflow-y: auto;
-}
-
 .side-toggle {
   font-size: 1.5rem;
   display: flex;
@@ -82,8 +78,7 @@ mat-sidenav-content {
   transition: 0.2s linear;
 }
 
-.nav-list-item:hover,
-.logout-item:hover {
+.nav-list-item:hover{
   background-color: #4070f4;
   border-radius: 8px;
   margin: 0 5px;
@@ -110,21 +105,12 @@ mat-sidenav-content {
   margin: 0 15% 0 7%;
 }
 
-.logout-item {
+.logout-container {
   position: absolute;
+  padding-bottom: 0.4rem;
   bottom: 0;
-  width: calc(100% - 30px); /* Adjust the width as needed */
-  margin: 5px 15px; /* Adjust the margin as needed */
-  padding: 10px; /* Add padding to make the button clickable */
-  background-color: transparent; /* Remove background color */
-  border: none; /* Remove border */
-  cursor: pointer;
-  transition: background-color 0.2s linear;
-}
-
-.logout-item:hover {
-  background-color: #4070f4;
-  border-radius: 8px;
+  left: 0;
+  width: 100%;
 }
 
 .selected {
