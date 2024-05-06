@@ -53,8 +53,57 @@ class Get extends GlobalMethods{
         return $this->sendPayload(null, "failed", "Failed to retrieve records.", $result['code']);
     }
 
+    public function get_events() {
+        $response = $this->get_records('events', null);
+        return $response;
+    }
+
     public function get_info() {
+        //$sqlString = "SELECT id, fname, lname, position FROM participants";
         $response = $this->get_records('participants', null);
         return $response;
+    }
+    
+    public function get_attendees($eventId) {
+        try {
+            // Prepare SQL statement to fetch attendance data for the specified event ID
+            $sql = "SELECT * FROM attendance WHERE event_id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$eventId]);
+            
+            // Fetch all attendance records for the specified event ID
+            $attendanceData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            // Return the fetched attendance data
+            return $attendanceData;
+        } catch(PDOException $e) {
+            // Handle any potential errors
+            return [
+                "status" => "error",
+                "message" => $e->getMessage()
+            ];
+        }
+    }
+
+
+    public function get_attendance_for_event($eventId) {
+        try {
+            // Prepare SQL statement to fetch attendance data for the specified event ID
+            $sql = "SELECT * FROM attendance WHERE event_id = ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$eventId]);
+            
+            // Fetch all attendance records for the specified event ID
+            $attendanceData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            // Return the fetched attendance data
+            return $attendanceData;
+        } catch(PDOException $e) {
+            // Handle any potential errors
+            return [
+                "status" => "error",
+                "message" => $e->getMessage()
+            ];
+        }
     }
 }

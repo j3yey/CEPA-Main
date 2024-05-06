@@ -60,6 +60,20 @@
         // Handle GET requests
         case 'GET':
             switch($request[0]){
+                case "getevent":
+                    echo json_encode($get->get_events()); // Call the get_events() method
+                    break;
+
+                case "getattendees":
+                    if(isset($request[1])) {
+                        $eventId = $request[1]; // Extract the event ID from the request
+                        echo json_encode($get->get_attendance_for_event($eventId)); // Call the get_attendance_for_event() method with the event ID
+                    } else {
+                        // Handle the case where the event ID is not provided
+                        echo "Event ID not provided";
+                        http_response_code(400); // Bad request status code
+                    }
+                    break;
                 case "getinfo":
                     echo json_encode($get->get_info()); // Call the get_events() method
                     break;
@@ -90,6 +104,11 @@
 
                 case 'attendance': // Handle attendance request
                     echo json_encode($post->submit_attendance($data)); // Call method to submit attendance
+                    break;
+
+                case 'addevent':
+                    // Return JSON-encoded data for adding events
+                    echo json_encode($post->add_event($data));
                     break;
                 
                 default:

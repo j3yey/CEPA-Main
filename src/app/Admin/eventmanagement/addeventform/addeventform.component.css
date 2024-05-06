@@ -1,0 +1,88 @@
+.addevent-form {
+    width: 55%;
+    margin: 15px;
+    position: fixed;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 25px;
+    padding-right: 35px;
+    border-radius: 10px;
+    box-shadow: 5px 6px 7px 1px #afadad;
+    z-index: 999;
+    height: 55%;
+    opacity: 0.9;
+}
+  
+.form-group {
+    margin-bottom: 20px;
+}
+  
+label {
+    display: block;
+    font-weight: bold;
+    width: 100%;
+    
+}
+  
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+}
+  
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+    width: 100%;
+    padding: 11px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+  
+.submit1 {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 9%;
+}
+  
+.submit1:hover {
+    background-color: #0056b3;
+}
+
+.cancel {
+    background-color: #cc0000;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cancel:hover {
+    background-color: #990000;
+}
+input {
+    width: 100%;
+    padding: 11px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}

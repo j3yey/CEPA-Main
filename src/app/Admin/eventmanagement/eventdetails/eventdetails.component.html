@@ -1,0 +1,47 @@
+<body>
+    <div class="container1">
+<header>
+    <p class="event-name">{{ data.event_name }}</p>
+<p><strong>Event Date:</strong> {{ data.event_date }}</p>
+<p><strong>Location:</strong> {{ data.event_location }}</p>
+<p><strong>Organizer:</strong> {{ data.organizer }}</p>
+</header>
+<mat-tab-group>
+    <mat-tab label="Attendance">
+        <div class="mat-elevation-z8">
+        <mat-table [dataSource]="attendanceData">
+            <!-- Last Name Column -->
+            <ng-container matColumnDef="l_name">
+              <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+              <mat-cell *matCellDef="let attendee">{{ attendee.l_name }}</mat-cell>
+            </ng-container>
+    
+            <!-- First Name Column -->
+            <ng-container matColumnDef="f_name">
+              <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+              <mat-cell *matCellDef="let attendee">{{ attendee.f_name }}</mat-cell>
+            </ng-container>
+    
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+              <mat-cell *matCellDef="let attendee">{{ attendee.email }}</mat-cell>
+            </ng-container>
+    
+            <!-- Add more columns if needed -->
+    
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        </div>
+    </mat-tab>
+    <mat-tab label="Register">
+        <p class="description"><strong>Description:</strong> {{ data.description }}</p>
+        <br>
+        <button class="Register" (click)="goToAttendance()">Register for this event</button>
+</mat-tab>
+    <mat-tab label="Others"> Content 3 </mat-tab>
+</mat-tab-group> 
+    </div>
+</body>
+

@@ -1,37 +1,90 @@
-.heading{
+.heading {
     padding-left: 40px;
     padding-top: 20px;
     padding-bottom: 7px;
     font-weight: bold;
     font-size: 30px;
-}
-
-.container {
-    --box-per-row: 4;
-    --gap: 75px;
+  }
+  
+  hr {
+    align-items: center;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: flex;
+  }
+  
+  .addevent {
+    z-index: 1;
+    padding: 10px 20px;
+    font-size: .9rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 150px;
+    margin-left: 2.6rem;
+    margin-top: 20px;
+    box-shadow: 5px 6px 7px 1px #afadad;
+  }
+  
+  .addevent:hover {
+    background-color: #0056b3;
+  }
+  
+  .container {
+    --box-per-row: 2;
+    --gap: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: var(--gap);
-    padding: 40px 108px 0 130px;
-    width: fit-content;
-}
-
-.box, .box1, .box2, .box3, .box4, .box5 {
+    padding: 40px 20px 0 20px;
+    width: auto; 
+    overflow-y: auto;
+    margin: 20px auto;
+    height: 535px; 
+  }
+  
+  .mat-card {
     position: relative;
     box-shadow: 5px 6px 7px 1px #afadad;
     border-radius: 20px;
     max-width: 360px;
     min-width: 360px;
-    height: 200px;
+    height: 245px;
     background-color: white;
     border: 1px solid #ccc;
     padding: 20px;
     box-sizing: border-box;
-    width: calc(25% - var(--gap)); /* Adjust width to include the gap */
-}
-
-.button {
+    margin-right: 20px; 
+    margin-bottom: 30px; 
+    left: 20px;
+  }
+  
+  .mat-card h1 {
+    text-align-last: left;
+    margin: 0;
+  }
+  
+  .mat-card hr {
+    text-align-last: left;
+    margin: 10px 0;
+  }
+  
+  .mat-card p {
+    text-align-last: left;
+    margin: 5px 0;
+  }
+  
+  .mat-card-actions {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .button {
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -39,24 +92,13 @@
     border-radius: 7px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width:100px;
+    width: 100px;
     box-shadow: 5px 6px 7px 1px #afadad;
     position: absolute;
     bottom: 20px;
     right: 20px;
-}
-.addevent{
-    z-index: 1;
-    padding: 10px 20px;
-    font-size: .9rem;
-    background-color: #007bff; 
-    color: #fff;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width:150px;
-    margin-left: 2.6rem;
-    margin-top:20px;
-    box-shadow: 5px 6px 7px 1px #afadad;
-}
+  }
+  .button:hover{
+    background-color: #0056b3;
+  }
+  

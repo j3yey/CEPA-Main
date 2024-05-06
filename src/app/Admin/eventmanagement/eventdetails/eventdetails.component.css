@@ -1,0 +1,53 @@
+header {
+    width: 95%;
+    padding: 1.5em;
+    position: relative;
+    overflow: hidden;
+    color: black;
+    background-color: #e4e9f7;
+    box-shadow: 8px 5px 15px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    border-radius: 10px;
+    background-image: url('/assets/images/CEPAlogo2-removebg-preview.png');
+    background-size: 300px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 50px) calc(50% - 13px); 
+    border: solid 1px #00000088;
+    margin-bottom: 20px;
+}
+
+body {
+    width: 85vh; 
+    height: 80vh; 
+    padding-left: 12px;
+    padding-top: 12px; 
+    padding-bottom: 12px;
+    padding-right: 15px;
+    border-radius: 20px;
+    
+}
+.event-name {
+    font-size: 24px; 
+    margin-bottom: 20px;
+}
+.Register {
+    height: 50px;
+    width: 150px;
+    background-color: #007bff;
+    box-shadow: 5px 6px 7px 1px #afadad;
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    margin: 10px;
+    margin-left: 79%;
+    margin-top: 43%;
+
+}
+
+.Register:hover {
+    background-color: #0056b3;
+}
+.description{
+    margin: 20px;
+}

@@ -27,6 +27,28 @@ class Post extends GlobalMethods{
      */
 
      //Enter the public function below
+     public function add_event($data) {
+        $sql = "INSERT INTO events(event_name, event_date, event_location, organizer, description) VALUES (?,?,?,?,?)";
+    
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([
+    
+                $data->event_name,
+                $data->event_date,
+                $data->event_location,
+                $data->organizer,
+                $data->description
+
+            ]);
+            return $this->sendPayload(null, "success", "Successfully created a new event.", 200);
+        } catch (\PDOException $e) {
+            $errmsg = $e->getMessage();
+        }
+        return $this->sendPayload(null, "failed", $errmsg, 400);
+    }
+    
+
     public function submit_feedback($data) {
         $sql = "INSERT INTO feedback(q1_answer, q2_answer, q3_answer, q4_answer, q5_answer, feedback) 
                 VALUES (?, ?, ?, ?, ?, ?)";
@@ -49,18 +71,6 @@ class Post extends GlobalMethods{
             return json_encode(["status" => "failed", "message" => $e->getMessage()]);
         }
     }
-   
-
-    /**
-     * Add a new job with the provided data.
-     *
-     * @param array|object $data
-     *   The data representing the new job.
-     *
-     * @return array|object
-     *   The added job data.
-     */
-
      
      //Enter public fuction below
     public function sendEmail($data){
@@ -117,23 +127,84 @@ class Post extends GlobalMethods{
     }
     
     public function submit_attendance($data) {
-        $sql = "INSERT INTO attendance (l_name, f_name, address, email, p_number) 
-                VALUES (?, ?, ?, ?, ?)";
+        // Check if participant exists, if not, insert them
+        $participantId = $this->insertParticipant($data);
+    
+        // Construct the SQL query to insert attendance data
+        $sql = "INSERT INTO attendance (event_id, participant_id, attendance_date, l_name, f_name, address, email, p_number) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute([
+                $data->event_id,
+                $participantId,
+                $data->attendance_date, // Add attendance date to the execution array
                 $data->l_name,
                 $data->f_name,
                 $data->address,
                 $data->email,
                 $data->p_number
             ]);
-            return $this->sendPayload(null, "success", "Successfully submitted attendance.", 200);
+            
+            // Return a success message in JSON format
+            return json_encode([
+                "status" => "success",
+                "message" => "Successfully submitted attendance."
+            ]);
         } catch(\PDOException $e) {
-            $errmsg = $e->getMessage();
-            $code = 400;
+            // Return an error message in JSON format
+            return json_encode([
+                "status" => "error",
+                "message" => $e->getMessage()
+            ]);
         }
-        return $this->sendPayload(null, "failed", $errmsg, $code);
+    }
+    
+    private function insertParticipant($data) {
+        // Check if the participant already exists by name and email
+        $existingParticipant = $this->getParticipantByNameAndEmail($data->f_name, $data->l_name, $data->email);
+    
+        if ($existingParticipant) {
+            // Participant already exists, return their ID
+            return $existingParticipant['participant_id'];
+        } else {
+            // Participant doesn't exist, insert them and return their ID
+            $sql = "INSERT INTO participants (first_name, last_name, email, phone_number, address) 
+                    VALUES (?, ?, ?, ?, ?)";
+            
+            try {
+                $statement = $this->pdo->prepare($sql);
+                $statement->execute([
+                    $data->f_name,
+                    $data->l_name,
+                    $data->email,
+                    $data->p_number,
+                    $data->address
+                ]);
+        
+                // Return the auto-generated participant ID
+                return $this->pdo->lastInsertId();
+            } catch(\PDOException $e) {
+                // Handle participant insertion error
+                // For simplicity, you can return null here or handle the error as needed
+                return null;
+            }
+        }
+    }
+    
+    private function getParticipantByNameAndEmail($firstName, $lastName, $email) {
+        // Check if the participant already exists by name and email
+        $sql = "SELECT participant_id FROM participants WHERE first_name = ? AND last_name = ? AND email = ?";
+        
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([$firstName, $lastName, $email]);
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch(\PDOException $e) {
+            // Handle error
+            return null;
+        }
     }
 }
 
