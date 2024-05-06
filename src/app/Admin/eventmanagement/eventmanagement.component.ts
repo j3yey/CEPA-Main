@@ -25,40 +25,39 @@ export class EventmanagementComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.loadEvents(); // Load events when the component initializes
-  }
+    ngOnInit(): void {
+      this.loadEvents(); // Load events when the component initializes
+    }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(AddeventformComponent, {
-      width: '500px',
-    });
+    openDialog() {
+      const dialogRef = this.dialog.open(AddeventformComponent, {
+        width: '500px',
+      });
 
-    dialogRef.componentInstance.eventAdded.subscribe(() => {
-      this.loadEvents(); // Refresh events after adding a new event
-    });
-  }
+      dialogRef.componentInstance.eventAdded.subscribe(() => {
+        this.loadEvents(); // Refresh events after adding a new event
+      });
+    }
 
-  loadEvents() {
-    this.eventService.getAllEvents().subscribe(
-      (response: any) => {
-        if (response.status.remarks === 'success') {
-          this.events = response.payload;
-          console.log('Events:', this.events);
-        } else {
-          console.error('Failed to fetch events:', response.status.message);
+    loadEvents() {
+      this.eventService.getAllEvents().subscribe(
+        (response: any) => {
+          if (response.status.remarks === 'success') {
+            this.events = response.payload;
+            console.log('Events:', this.events);
+          } else {
+            console.error('Failed to fetch events:', response.status.message);
+          }
+        },
+        (error) => {
+          console.error('Error fetching events:', error);
         }
-      },
-      (error) => {
-        console.error('Error fetching events:', error);
-      }
-    );
-  }
+      );
+    }
 
-  openEventDetailsDialog(event: any) {
-    this.dialog.open(EventdetailsComponent, {
-      data: event, // Pass the event data directly
-    });
-  }
-
+    openEventDetailsDialog(event: any) {
+      this.dialog.open(EventdetailsComponent, {
+        data: event, // Pass the event data directly
+      });
+    }
 }

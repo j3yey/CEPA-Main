@@ -47,5 +47,5 @@ export class EventdetailsComponent {
     } else {
       console.error('Event ID is undefined or null.');
     }
-  }
+  }  
 }

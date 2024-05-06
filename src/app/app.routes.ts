@@ -26,12 +26,12 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'attendanceform',
+    path: 'attendance/:eventId',
     component: AttendanceComponent,
   },
   {
     path: '',
-    redirectTo: 'User/UserHome',
+    redirectTo: 'user/userhome',
     pathMatch: 'full',
   },
   {
@@ -41,14 +41,6 @@ export const routes: Routes = [
       {
         path: 'userhome',
         component: UserhomeComponent,
-      },
-      {
-        path: 'searchparticipant',
-        component: SearchparticipantComponent,
-      },
-      {
-        path: 'feedback',
-        component: FeedbackComponent,
       },
     ]
   },
@@ -84,10 +76,9 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'user/userhome', 
+    redirectTo: 'user/userhome', // Redirect unknown paths to user home
   },
 ];
-  
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
