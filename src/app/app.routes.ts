@@ -6,13 +6,11 @@ import { EventmanagementComponent } from './Admin/eventmanagement/eventmanagemen
 import { AboutusComponent } from './Admin/aboutus/aboutus.component';
 import { LoginComponent } from './Admin/login/login.component';
 import { SidenavComponent } from './Admin/sidenav/sidenav.component';
+import { AttendanceComponent } from './attendance/attendance.component';
 import { MailerComponent } from './Admin/mailer/mailer.component';
 import { UserhomeComponent } from './User/userhome/userhome.component';
 import { UsersidenavComponent } from './User/usersidenav/usersidenav.component';
 
-import { FeedbackComponent } from './User/feedback/feedback.component';
-import { SearchparticipantComponent } from './User/searchparticipant/searchparticipant.component';
-import { AttendanceComponent } from './attendance/attendance.component';
 
 export const routes: Routes = [
   {
