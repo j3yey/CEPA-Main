@@ -1,19 +1,19 @@
+.heading{
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 7px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
 .container {
-    width: 70%;
-    max-width: 800px;
-    margin: 10px auto;
+    width: 94%;
+    margin: 10px auto 20px auto;
     background-color: #fff;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 5px 6px 7px 1px #afadad;
     opacity: 0.9;
-}
-
-.heading {
-    font-size: 20px;
-    margin-left: 10px;
-    font-weight: bold;
-    margin-top: 10px;
 }
 
 .body-content {
@@ -58,63 +58,52 @@
     background-color: #007bff;
 }
 
-textarea {
-    width: calc(100% - 10px);
+#feedback {
+    width: 100%;
     height: 53px;
     resize: none;
     font-family: 'Poppins', sans-serif;
-    margin-top: 10px;
+    margin: auto;
 }
 
 .feedback-container {
-    margin-top: 5px;
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    box-shadow: 5px 6px 7px 1px #afadad;
+    opacity: 0.9;
 }
 
 .send-feedback-button {
-    margin-top: 10px;
+    max-width: 40%;
+    margin: 10px;
     padding: 5px 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    float: right;
-
-}
-/* For screens up to 320px width (iPhone SE) */
-@media screen and (max-width: 320px) {
-    mat-card {
-        margin: 10px;
-
-    }
-    .container {
-        width: 80%; /* Adjust width to fit the screen */
-        max-width: none; /* Remove max-width restriction */
-        margin: 0; /* Reset margin */
-        padding: 2px; /* Adjust padding for better fit */
-    }
-    .heading {
-        font-size: 30px; /* Decrease font size for smaller screens */
-        margin-left: 10px; /* Adjust margin for smaller screens */
-    }
-    .option {
-        width: calc(50% - 10px); /* Adjust width for responsiveness */
-    }
 }
 
-/* For screens larger than 320px */
-@media screen and (min-width: 321px) {
+.button {
+    display: flex;
+    justify-content: flex-end; 
+}
+
+@media screen and (max-width: 500px) {
     .container {
-        width: 85%; /* Reset width */
+        width: 81%; /* Reset width */
         max-width: 1100px; /* Reset max-width */
         margin: 15px auto; /* Reset margin */
-        padding: 2px; /* Reset padding */
-    }
-    .heading {
-        font-size: 40px; /* Reset font size */
-        margin-left: 20px; /* Reset margin */
     }
     .option {
         width: calc(33.33% - 20px); /* Reset width */
+    }
+    .feedback-container {
+        width: 85%;
+        margin: auto;
+        margin-top: 5px;
+        box-shadow: 5px 6px 7px 1px #afadad;
+        opacity: 0.9;
     }
 }

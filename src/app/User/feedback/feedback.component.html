@@ -1,7 +1,6 @@
-
 <body>
-    <h1 class="heading">Feedback</h1>
-    <hr style="margin-left:15px;">
+    <h1 class="heading">Feedback <i class="fa-solid fa-users"></i></h1>
+    <hr style="align-items: center; margin-left: 40px; margin-right: 40px; display: flex;">
     <div class="container">
         <div class="question">
             <label for="q1">Did you find events you liked on our platform?</label>
@@ -59,16 +58,12 @@
         </div>
         
         </div>
- 
         <div class="feedback-container">
             <form #feedbackForm="ngForm">
-              
-              <mat-card>
+                <mat-card>
                 <mat-card-content><textarea id="feedback" name="feedback" [(ngModel)]="feedback" placeholder="Give us your thoughts..." required></textarea></mat-card-content>
-              </mat-card>
-              <button type="submit" class="send-feedback-button" (click)="submitFeedback(feedbackForm)">Send Feedback</button>
+                <div class="button"><button type="submit" class="send-feedback-button" (click)="submitFeedback(feedbackForm)">Send Feedback</button></div>
+                </mat-card>
             </form>
-          </div>
-          
-          
+        </div>
 </body>
