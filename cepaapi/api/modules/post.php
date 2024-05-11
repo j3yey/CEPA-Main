@@ -224,5 +224,18 @@ class Post extends GlobalMethods{
             return null;
         }
     }
+    public function archiveParticipant($data) {
+        $sql = "UPDATE participants SET isArchived = 1 WHERE participant_id = ?";
+        
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([$data->participant_id]);
+            return $this->sendPayload(null, "success", "Successfully archived participant.", 200);
+        } catch (\PDOException $e) {
+            $errmsg = $e->getMessage();
+            return $this->sendPayload(null, "failed", $errmsg, 400);
+        }
+    }
+    
 }
 

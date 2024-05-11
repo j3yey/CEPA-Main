@@ -36,17 +36,15 @@ tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-
-
 .tables {
   width: 80%;
   margin: 20px auto;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 .scrollable-table {
-  width: 80%;
-  height: 800px; /* Set a fixed height */
+  width: 93%;
+  height: 700px; /* Set a fixed height */
   margin: 20px auto;
   overflow-y: auto; /* Enable vertical scrolling */
 }
@@ -62,4 +60,100 @@ th {
 /* Adjust the z-index of mat-header-row so it stays below the sticky header */
 mat-header-row {
   z-index: 1;
+}
+
+/* Edit Button */
+button.edit-button {
+  background-color: green; /* Change button background color to green */
+  color: white; /* Change button text color to white */
+  border-radius: 10px;
+}
+
+/* Delete Button */
+button.delete-button {
+  background-color: red; /* Change button background color to red */
+  color: white; /* Change button text color to white */
+  border-radius: 10px;
+}
+
+/* Button Space */
+.button-space {
+  margin-left: 8px; /* Adjust the value as needed to control the space between icons */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-left: 50px; /* Adjust margin as needed */
+  margin-top: 20px;
+}
+
+.search-bar input[type="text"] {
+  padding: 10px;
+  border: 2px solid #ddd; /* Add border */
+  border-radius: 10px;
+  margin-right: 10px;
+  width: 300px; /* Adjust width as needed */
+  outline: none; /* Remove outline */
+}
+
+.search-bar input[type="text"]:focus {
+  border-color: #007bff; /* Change border color on focus */
+}
+
+.search-bar input[type="text"]::placeholder {
+  color: #aaa; /* Placeholder color */
+}
+
+.search-bar button {
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #0056b3; /* Change button background color on hover */
+}
+
+
+/* Apply circular shape when the media query is hit */
+@media only screen and (max-width: 690px) {
+  /* Hide columns for smaller devices */
+  th:nth-child(3), td:nth-child(3), /* Hide Phone Number column */
+  th:nth-child(4), td:nth-child(4) { /* Hide Email column */
+    display: none;
+  }
+
+  .search-bar{
+
+margin: auto;
+justify-content: center;
+  }
+
+  h1{
+    font-size: 20px;
+  }
+  /* Adjust font size for smaller devices */
+  th, td {
+    font-size: small;
+  }
+
+  /* Adjust table width for smaller devices */
+  table {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .scrollable-table {
+    width: 85%;
+    height: 600px;
+  }
+}
+
+/* Styles for bigger devices */
+@media only screen and (min-width: 691px) {
+  /* No specific styles needed for now */
 }
