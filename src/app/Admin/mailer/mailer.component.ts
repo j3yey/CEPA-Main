@@ -3,6 +3,7 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { EmailService } from '../../service/email.service';
 
 @Component({
   selector: 'app-mailer',
@@ -22,35 +23,38 @@ export class MailerComponent {
   emailMessage: string = '';
   emailSent: boolean = false;
   emailError: boolean = false;
+  showSuccessMessage: boolean = false;
   emailErrorMessage: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private emailService: EmailService) { }
 
-  sendEmail(): void {
+  sendEmail() {
     const emailData = {
       to: this.recipientEmail,
       subject: this.emailSubject,
-      message: this.emailMessage
+      message: this.emailMessage // No need to replace newline characters here
     };
+  
+    // Modify the email message format before sending
+    emailData.message = emailData.message.replace(/\n/g, '<br>');
+  
+    this.emailService.sendEmail(emailData).subscribe(
+      () => {
+        this.emailSent = true;
+        this.showSuccessMessage = true;
+        this.resetForm(); // Reset form after successful sending
+      },
+      (error: any) => {
+        this.emailError = true;
+        this.emailErrorMessage = error.message;
+      }
+    );
+  }
 
-    this.http.post<any>('http://localhost/CEPA-Main/cepaapi/api/sendemail', emailData)
-      .subscribe(
-        response => {
-          this.emailSent = response.success;
-          if (this.emailSent) {
-            this.emailMessage = 'Email sent successfully!';
-            this.resetForm();
-          } else {
-            this.emailError = true;
-            this.emailErrorMessage = 'Failed to send email: ' + response.message;
-          }
-        },
-        error => {
-          console.error('Error occurred:', error);
-          this.emailError = true;
-          this.emailErrorMessage = 'Failed to send email. Please try again later.';
-        }
-      );
+  sanitizeMessage(message: string): string {
+    message = message.replace(/<br>/g, '\n');
+    const tempElement = new DOMParser().parseFromString(message, 'text/html');
+    return tempElement.body.textContent || '';
   }
 
   resetForm(): void {
@@ -60,5 +64,9 @@ export class MailerComponent {
     this.emailSent = false;
     this.emailError = false;
     this.emailErrorMessage = '';
+  }
+
+  closeSuccessMessage() {
+    this.showSuccessMessage = false;
   }
 }

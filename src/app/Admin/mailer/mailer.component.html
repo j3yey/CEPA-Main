@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Sender</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-EXAMPLEHASH" crossorigin="anonymous" />
 </head>
 <body>
     <div class="container">
@@ -15,10 +16,18 @@
             <input type="text" id="subject" name="subject" required [(ngModel)]="emailSubject">
             <label for="message">Message:</label>
             <textarea id="message" name="message" rows="5" required [(ngModel)]="emailMessage"></textarea>
+            <input type="hidden" name="htmlMessage" [value]="emailMessage">
             <input type="submit" value="Send Email">
         </form>
-        <div *ngIf="emailSent">{{ emailMessage }}</div>
-        <div *ngIf="emailError">{{ emailErrorMessage }}</div>
     </div>
+    <div class="success-notification" *ngIf="showSuccessMessage">
+        <div class="success-content">
+            <span>Email Successfully Sent!</span>
+            <button class="close-button" (click)="closeSuccessMessage()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="emailError">{{ emailErrorMessage }}</div>
 </body>
 </html>

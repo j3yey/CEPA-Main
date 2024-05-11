@@ -71,9 +71,28 @@ class Post extends GlobalMethods{
             return json_encode(["status" => "failed", "message" => $e->getMessage()]);
         }
     }
+    public function edit_participant($data) {
+        $sql = "UPDATE participants SET first_name=?, last_name=?, email=?, phone_number=?, address=? WHERE participant_id=?";
+        
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([
+                $data->participant_id, // Assuming participant_id is included in $data
+                $data->first_name,
+                $data->last_name,
+                $data->email,
+                $data->phone_number,
+                $data->address
+            ]);
+            return $this->sendPayload(null, "success", "Successfully updated participant information.", 200);
+        } catch (\PDOException $e) {
+            $errmsg = $e->getMessage();
+            return $this->sendPayload(null, "failed", $errmsg, 400);
+        }
+    }
      
      //Enter public fuction below
-    public function sendEmail($data){
+     public function sendEmail($data){
         // Check if $data is null
         if ($data === null) {
             return ['success' => false, 'message' => 'Data is null'];
@@ -112,18 +131,17 @@ class Post extends GlobalMethods{
             // Check if $data->message is set
             if (isset($data->message)) {
                 $mail->Body = $data->message;
+                $mail->isHTML(true); // Set email as HTML
             } else {
                 return ['success' => false, 'message' => 'Email message is not provided'];
             }
     
-            $mail->isHTML(true);
-    
             // Send email
             $mail->send();
-    return ['success' => true, 'message' => 'Email sent successfully'];
-} catch (Exception $e) {
-    return ['success' => false, 'message' => 'Failed to send email: ' . $mail->ErrorInfo];
-}
+            return ['success' => true, 'message' => 'Email sent successfully'];
+        } catch (Exception $e) {
+            return ['success' => false, 'message' => 'Failed to send email: ' . $mail->ErrorInfo];
+        }
     }
     
     public function submit_attendance($data) {

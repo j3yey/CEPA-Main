@@ -8,15 +8,19 @@
     box-shadow: 5px 6px 7px 1px #afadad;
     opacity: 0.9;
 }
+
 h1 {
     text-align: center;
 }
+
 form {
     margin-top: 20px;
 }
+
 label {
     font-weight: bold;
 }
+
 input[type="text"], textarea {
     width: 100%;
     padding: 10px;
@@ -26,6 +30,7 @@ input[type="text"], textarea {
     border-radius: 5px;
     box-sizing: border-box;
 }
+
 input[type="email"], textarea {
     width: 100%;
     padding: 10px;
@@ -35,6 +40,7 @@ input[type="email"], textarea {
     border-radius: 5px;
     box-sizing: border-box;
 }
+
 input[type="submit"] {
     width: 100%;
     padding: 10px;
@@ -46,6 +52,44 @@ input[type="submit"] {
     font-size: 16px;
     box-shadow: 5px 6px 7px 1px #afadad;
 }
+
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.success-notification {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Light text color */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  }
+  
+  .success-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .success-content span {
+    margin-right: 10px;
+  }
+  
+  .close-button {
+    background-color: transparent;
+    color: red;
+    border: none;
+    padding: 0;
+    font-size: 20px; /* Adjust the size of the icon */
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .close-button:hover {
+    color: darkred; /* Darken the color on hover */
+  }
+  
