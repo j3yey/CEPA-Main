@@ -24,6 +24,15 @@ mat-sidenav-content {
   z-index: -1;
 }
 
+mat-toolbar{
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  height: 10vh;
+  max-height: 10vh;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .mat-sidenav {
   background-color: whitesmoke;
   width: 300px;
@@ -121,6 +130,17 @@ mat-sidenav-content {
 
 @media screen and (max-width: 768px) {
   mat-sidenav {
-    width: 0 !important;
+    max-width: 240px; /* Adjust the max-width as needed */
+    min-width: 0;
+  } 
+  .mat-sidenav.mat-drawer-side {
+    width: 100%;
+  }
+.nav-list-item span {
+  margin-left: 5px;
+  text-transform: capitalize;
+}
+  mat-card{
+    width: 80px !important;
   }
 }
