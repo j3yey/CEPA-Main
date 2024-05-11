@@ -59,9 +59,9 @@ class Get extends GlobalMethods{
     }   
 
     public function get_info() {
-        //$sqlString = "SELECT id, fname, lname, position FROM participants";
-        $response = $this->get_records('participants', null);
-        return $response;
+        $condition = "isArchived = 0"; // Condition to filter out archived participants
+        $response = $this->get_records('participants', $condition);
+        return $response; 
     }
     
     public function get_attendees($eventId) {

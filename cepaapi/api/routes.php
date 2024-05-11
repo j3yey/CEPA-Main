@@ -115,6 +115,15 @@
                     // Return JSON-encoded data for adding events
                     echo json_encode($post->add_event($data));
                     break;
+
+                case 'editparticipant':
+                    // Return JSON-encoded data for adding events
+                    echo json_encode($post->edit_participant($data));
+                    break;
+
+                case 'archiveparticipant':
+                    echo json_encode($post->archiveParticipant($data));
+                    break;
                 
                 default:
                     // Return a 403 response for unsupported requests
