@@ -1,40 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.component.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
     <title>Login</title>
 </head>
-<body>
+<body class="mat-typography">
     <div class="nav">
         <img src="assets/images/gcLogo.png" alt="GCLogo">
         <img src="assets/images/ccsLogo.png" alt="CCSLogo">
         <img src="assets/images/CEPAlogo2-removebg-preview.png" alt="CEPAnav">
     </div>
-      <div class="container">
+    <div class="container mat-elevation-z8">
         <div class="row">
-        <div class=" column llogo">
-            <img src="assets/images/logo/CEPALogo-removebg-preview.png" alt="Logo">
+            <div class="column llogo">
+                <img src="assets/images/logo/CEPALogo-removebg-preview.png" alt="Logo">
+            </div>
+            <div class="column box">
+                <header>Admin Login</header>
+                <form (ngSubmit)="login()" class="form" #loginForm="ngForm">
+                    <mat-form-field class="field">
+                        <input matInput type="text" name="email" id="email" placeholder="ID Number" autocomplete="off" required [(ngModel)]="email" #emailInput="ngModel">
+                    </mat-form-field>
+    
+                    <mat-form-field class="field">
+                        <input matInput type="password" name="password" id="password" placeholder="Password" autocomplete="off" required [(ngModel)]="password" #passwordInput="ngModel">
+                    </mat-form-field>
+    
+                    <button mat-raised-button color="primary" type="submit" class="btn" [disabled]="loginForm.invalid">Login</button>
+                    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div> <!-- Display error message here -->
+                </form>
+            </div>
         </div>
-        <div class=" colummn box form-box">
-            <header>Admin Login</header>
-            <form action="" method="post">
-                <div class="field input">
-                    <input type="text" name="email" id="email" placeholder="ID Number" autocomplete="off" required>
-                </div>
-
-                <div class="field1 input">
-                    <input type="password" name="password" id="password" placeholder="Password" autocomplete="off" required>
-                </div>
-
-                <div class="field">
-                    <input type="submit" class="btn" name="submit" value="Login" required>
-                </div>
-            </form>
-        </div>
-      </div>
-    </div>
+    </div>    
 </body>
-</html>

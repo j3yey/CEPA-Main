@@ -12,13 +12,14 @@ import { UserhomeComponent } from './User/userhome/userhome.component';
 import { UsersidenavComponent } from './User/usersidenav/usersidenav.component';
 import { SearchparticipantComponent } from './User/searchparticipant/searchparticipant.component';
 import { FeedbackComponent } from './User/feedback/feedback.component';
+import { AdminAuthGuard } from './service/login/auth.guard';
 
 
 export const routes: Routes = [
   {
-    path: 'admin',
-    redirectTo: 'admin/login',
-    pathMatch: 'full',
+    path: 'admin/login',
+    component: LoginComponent,
+      canActivate: [AdminAuthGuard]
   },
   {
     path: 'user',
@@ -55,6 +56,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: SidenavComponent,
+    canActivate: [AdminAuthGuard],
     children: [
       {
         path: 'home',
@@ -79,14 +81,11 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'admin/login',
-    component: LoginComponent,
-  },
-  {
     path: '**',
-    redirectTo: 'user/userhome', // Redirect unknown paths to user home
+    redirectTo: 'user/userhome',
   },
 ];
+
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

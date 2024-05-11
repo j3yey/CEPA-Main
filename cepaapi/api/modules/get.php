@@ -56,7 +56,7 @@ class Get extends GlobalMethods{
     public function get_events() {
         $response = $this->get_records('events', null);
         return $response;
-    }
+    }   
 
     public function get_info() {
         //$sqlString = "SELECT id, fname, lname, position FROM participants";

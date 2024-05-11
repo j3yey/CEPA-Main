@@ -61,8 +61,6 @@ fetchEventDetails(eventId: string) {
     );
 }
 
-
-
 onSubmit() {
   if (this.form.invalid) {
     this.openSnackBar('Please ensure all fields are filled out correctly.');

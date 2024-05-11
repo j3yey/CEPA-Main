@@ -8,6 +8,7 @@ require_once 'C:/xampp/htdocs/CEPA-Main/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Firebase\JWT\JWT;
 
 class Post extends GlobalMethods{
     private $pdo;
@@ -27,7 +28,49 @@ class Post extends GlobalMethods{
      */
 
      //Enter the public function below
-     public function add_event($data) {
+    public function login($data) {
+        // Extract ID and password from the request data
+        $id = isset($data->id) ? $data->id : null;
+        $password = isset($data->password) ? $data->password : null;
+
+        // Check if ID and password are provided
+        if (!$id || !$password) {
+            // Return error response if ID or password is missing
+            return array('error' => 'ID and password are required');
+        }
+
+        // Perform the authentication logic by querying the database
+        // Check if the provided ID and password match any record in the admin_login table
+        $stmt = $this->pdo->prepare("SELECT * FROM admin_login WHERE id = ? AND password = ?");
+        $stmt->execute([$id, $password]);
+        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($admin) {
+            // Admin found, generate a dynamic secret key
+    // Generate a dynamic secret key
+    $secret_key = bin2hex(random_bytes(32)); // Generate a 32-byte (256-bit) key and convert it to hexadecimal format
+
+    // Define the algorithm
+    $algorithm = 'HS256'; // Example algorithm, you can choose the appropriate one based on your requirements
+
+    // Generate JWT token with 1-day expiration
+    $payload = array(
+        "id" => $admin['id'],
+        "exp" => time() + (60 * 60 * 24) // Token expiration time (1 day)
+    );
+    $jwt = JWT::encode($payload, $secret_key, $algorithm);
+
+    // Return success response with JWT token
+    return array('success' => 'Login successful', 'token' => $jwt);
+        } else {
+            // No admin found with the provided ID and password, return error response
+            return array('error' => 'Invalid ID or password');
+        }
+    }
+
+    
+
+    public function add_event($data) {
         $sql = "INSERT INTO events(event_name, event_date, event_location, organizer, description) VALUES (?,?,?,?,?)";
     
         try {
