@@ -20,7 +20,7 @@ export class AddeventformComponent {
     private formBuilder: FormBuilder,
     private eventService: EventService,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<AddeventformComponent>
+    private dialogRef: MatDialogRef<AddeventformComponent>,
   ) {
       this.minDate = new Date().toISOString().split('T')[0];
       this.form = this.formBuilder.group({
@@ -51,6 +51,7 @@ export class AddeventformComponent {
     );
   }
   
+  
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Close', {
       duration: 3000, // Snackbar duration in milliseconds
@@ -69,7 +70,7 @@ export class AddeventformComponent {
       return { futureDate: true };
     }
     return null;
-  }  
+  }
 }
 
 

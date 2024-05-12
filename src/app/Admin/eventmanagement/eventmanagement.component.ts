@@ -44,7 +44,7 @@ export class EventmanagementComponent implements OnInit {
         (response: any) => {
           if (response.status.remarks === 'success') {
             this.events = response.payload;
-            console.log('Events:', this.events);
+            // console.log('Events:', this.events); //Uncomment if checking
           } else {
             console.error('Failed to fetch events:', response.status.message);
           }
@@ -58,6 +58,8 @@ export class EventmanagementComponent implements OnInit {
     openEventDetailsDialog(event: any) {
       this.dialog.open(EventdetailsComponent, {
         data: event, // Pass the event data directly
+        width: '90%', // Default width of the dialog
+        maxWidth: '844px', // Default maximum width of the dialog
       });
     }
 }

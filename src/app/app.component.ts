@@ -59,6 +59,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-root',
@@ -109,6 +110,7 @@ import { MatTreeModule } from '@angular/material/tree';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    QRCodeModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

@@ -38,6 +38,9 @@
     <mat-tab label="Register">
         <p class="description"><strong>Description:</strong> {{ data.description }}</p>
         <br>
+        <div class="qrcode" *ngIf="qrCodeData">
+            <qrcode [qrdata]="qrCodeData" [width]="200"></qrcode>
+        </div>                         
         <button class="Register" (click)="goToAttendance()">Register for this event</button>
 </mat-tab>
     <mat-tab label="Others"> Content 3 </mat-tab>

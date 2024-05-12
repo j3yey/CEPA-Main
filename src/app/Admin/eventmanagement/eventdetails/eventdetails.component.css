@@ -1,5 +1,5 @@
 header {
-    width: 95%;
+    width: auto;
     padding: 1.5em;
     position: relative;
     overflow: hidden;
@@ -17,12 +17,8 @@ header {
 }
 
 body {
-    width: 85vh; 
     height: 80vh; 
-    padding-left: 12px;
-    padding-top: 12px; 
-    padding-bottom: 12px;
-    padding-right: 15px;
+    padding: 12px 14px 0 12px;
     border-radius: 20px;
     
 }
@@ -30,6 +26,7 @@ body {
     font-size: 24px; 
     margin-bottom: 20px;
 }
+
 .Register {
     height: 50px;
     width: 150px;
@@ -40,9 +37,8 @@ body {
     border-radius: 9px;
     cursor: pointer;
     margin: 10px;
-    margin-left: 79%;
-    margin-top: 43%;
-
+    float: right; /* Adjusted margin-left to float */
+    margin-top: 10px; /* Changed margin-top value */
 }
 
 .Register:hover {
@@ -50,4 +46,44 @@ body {
 }
 .description{
     margin: 20px;
+}
+
+.qrcode {
+    margin: auto; /* Center the QR code horizontally */
+    width: fit-content; /* Set the width to fit the content */
+    height: fit-content; /* Set the height to fit the content */
+}
+
+@media only screen and (max-width: 690px) {
+    header {
+        width: auto; /* Adjust width to fill the screen */
+        padding: 1em; /* Reduce padding for smaller screens */
+        background-size: 250px; /* Adjust background size */
+        background-position: calc(100% - 11px) calc(50% - 6px); 
+        background-size: 100px;
+        margin-bottom: 10px; /* Reduce margin bottom */
+    }
+
+    body {
+        padding: 10px; /* Increase padding for smaller screens */
+    }
+
+    .event-name {
+        font-size: 20px; /* Reduce font size for smaller screens */
+        margin-bottom: 10px; /* Reduce margin bottom */
+    }
+
+    .Register {
+        width: 120px; /* Reduce button width */
+        margin: 5px; /* Reduce button margin */
+    }
+
+    .description {
+        margin: 10px; /* Reduce margin for description */
+    }
+
+    .qrcode {
+        margin: auto; /* Center the QR code horizontally */
+        width: 80%; /* Reduce QR code width */
+    }
 }
