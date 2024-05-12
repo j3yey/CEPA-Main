@@ -134,59 +134,125 @@ class Post extends GlobalMethods{
         }
     }
      
-     //Enter public fuction below
-     public function sendEmail($data){
-        // Check if $data is null
-        if ($data === null) {
-            return ['success' => false, 'message' => 'Data is null'];
-        }
+     //Send Email no template
+    //  public function sendEmail($data){
+    //     // Check if $data is null
+    //     if ($data === null) {
+    //         return ['success' => false, 'message' => 'Data is null'];
+    //     }
     
-        // Debug autoload
-        $mail = new PHPMailer(true);
+    //     // Debug autoload
+    //     $mail = new PHPMailer(true);
     
-        try {
-            // Configure SMTP settings
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                       //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'cepa.appdev@gmail.com';                //SMTP username
-            $mail->Password   = 'iiot dgrb rlxw mcas';                  //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    //     try {
+    //         // Configure SMTP settings
+    //         $mail->isSMTP();                                            //Send using SMTP
+    //         $mail->Host       = 'smtp.gmail.com';                       //Set the SMTP server to send through
+    //         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    //         $mail->Username   = 'cepa.appdev@gmail.com';                //SMTP username
+    //         $mail->Password   = 'iiot dgrb rlxw mcas';                  //SMTP password
+    //         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    //         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
-            // Set email content
-            $mail->setFrom('cepa.appdev@gmail.com', 'CEPA');
+    //         // Set email content
+    //         $mail->setFrom('cepa.appdev@gmail.com', 'CEPA');
     
-            // Check if $data->to is set
-            if (isset($data->to)) {
-                $mail->addAddress($data->to);
-            } else {
-                return ['success' => false, 'message' => 'Recipient email is not provided'];
-            }
+    //         // Check if $data->to is set
+    //         if (isset($data->to)) {
+    //             $mail->addAddress($data->to);
+    //         } else {
+    //             return ['success' => false, 'message' => 'Recipient email is not provided'];
+    //         }
     
-            // Check if $data->subject is set
-            if (isset($data->subject)) {
-                $mail->Subject = $data->subject;
-            } else {
-                return ['success' => false, 'message' => 'Email subject is not provided'];
-            }
+    //         // Check if $data->subject is set
+    //         if (isset($data->subject)) {
+    //             $mail->Subject = $data->subject;
+    //         } else {
+    //             return ['success' => false, 'message' => 'Email subject is not provided'];
+    //         }
     
-            // Check if $data->message is set
-            if (isset($data->message)) {
-                $mail->Body = $data->message;
-                $mail->isHTML(true); // Set email as HTML
-            } else {
-                return ['success' => false, 'message' => 'Email message is not provided'];
-            }
+    //         // Check if $data->message is set
+    //         if (isset($data->message)) {
+    //             $mail->Body = $data->message;
+    //             $mail->isHTML(true); // Set email as HTML
+    //         } else {
+    //             return ['success' => false, 'message' => 'Email message is not provided'];
+    //         }
     
-            // Send email
-            $mail->send();
-            return ['success' => true, 'message' => 'Email sent successfully'];
-        } catch (Exception $e) {
-            return ['success' => false, 'message' => 'Failed to send email: ' . $mail->ErrorInfo];
-        }
+    //         // Send email
+    //         $mail->send();
+    //         return ['success' => true, 'message' => 'Email sent successfully'];
+    //     } catch (Exception $e) {
+    //         return ['success' => false, 'message' => 'Failed to send email: ' . $mail->ErrorInfo];
+    //     }
+    // }
+    
+// Enter public function below
+public function sendEmail($data, $template = 'default'){
+    // Check if $data is null
+    if ($data === null) {
+        return ['success' => false, 'message' => 'Data is null'];
+    }
+
+    // Construct the path to the template file
+    $templateFile = __DIR__ . '/../template/' . $template . '.php';
+    
+    // Check if the template file exists
+    if (!file_exists($templateFile)) {
+        return ['success' => false, 'message' => 'Template not found'];
     }
     
+    // Start output buffering to capture template content
+    ob_start();
+    
+    // Include the template file
+    include $templateFile;
+    
+    // Get the content of the template and clear output buffer
+    $emailContent = ob_get_clean();
+
+    // Initialize PHPMailer
+    $mail = new PHPMailer(true);
+
+    try {
+        // Configure SMTP settings
+        $mail->isSMTP();                                          
+        $mail->Host       = 'smtp.gmail.com';                     
+        $mail->SMTPAuth   = true;                                   
+        $mail->Username   = 'cepa.appdev@gmail.com';                
+        $mail->Password   = 'iiot dgrb rlxw mcas';                  
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
+        $mail->Port       = 465;                                    
+
+        // Set sender
+        $mail->setFrom('cepa.appdev@gmail.com', 'CEPA');
+
+        // Set recipient
+        if (isset($data->to)) {
+            $mail->addAddress($data->to);
+        } else {
+            return ['success' => false, 'message' => 'Recipient email is not provided'];
+        }
+
+        // Set subject
+        if (isset($data->subject)) {
+            $mail->Subject = $data->subject;
+        } else {
+            return ['success' => false, 'message' => 'Email subject is not provided'];
+        }
+
+        // Set email content from template
+        $mail->isHTML(true); 
+        $mail->Body = $emailContent;
+
+        // Send email
+        $mail->send();
+        return ['success' => true, 'message' => 'Email sent successfully'];
+    } catch (Exception $e) {
+        return ['success' => false, 'message' => 'Failed to send email: ' . $mail->ErrorInfo];
+    }
+}
+
     public function submit_attendance($data) {
         // Check if participant exists, if not, insert them
         $participantId = $this->insertParticipant($data);

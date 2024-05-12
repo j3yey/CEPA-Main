@@ -4,6 +4,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EmailService } from '../../service/email.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-mailer',
@@ -23,10 +24,10 @@ export class MailerComponent {
   emailMessage: string = '';
   emailSent: boolean = false;
   emailError: boolean = false;
-  showSuccessMessage: boolean = false;
-  emailErrorMessage: string = '';
 
-  constructor(private emailService: EmailService) { }
+  constructor(private emailService: EmailService, private snackBar: MatSnackBar) { }
+
+  ngOnInit(): void {}
 
   sendEmail() {
     const emailData = {
@@ -41,20 +42,20 @@ export class MailerComponent {
     this.emailService.sendEmail(emailData).subscribe(
       () => {
         this.emailSent = true;
-        this.showSuccessMessage = true;
+        this.openSnackBar('Email sent successfully');
         this.resetForm(); // Reset form after successful sending
       },
       (error: any) => {
         this.emailError = true;
-        this.emailErrorMessage = error.message;
+        this.openSnackBar('Failed to send email');
       }
     );
   }
 
-  sanitizeMessage(message: string): string {
-    message = message.replace(/<br>/g, '\n');
-    const tempElement = new DOMParser().parseFromString(message, 'text/html');
-    return tempElement.body.textContent || '';
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, // Snackbar duration in milliseconds
+    });
   }
 
   resetForm(): void {
@@ -63,10 +64,5 @@ export class MailerComponent {
     this.emailMessage = '';
     this.emailSent = false;
     this.emailError = false;
-    this.emailErrorMessage = '';
-  }
-
-  closeSuccessMessage() {
-    this.showSuccessMessage = false;
   }
 }
