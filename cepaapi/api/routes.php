@@ -74,6 +74,7 @@
                         http_response_code(400); // Bad request status code
                     }
                     break;
+                    
                 case "getinfo":
                     echo json_encode($get->get_info()); // Call the get_events() method
                     break;

@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { QrcodeDisplayComponent } from './qrcode/qrcode-display/qrcode-display.component';
 import { QRCodeService } from '../../service/qr-code.service';
 import { EventService } from '../../service/event.service';
-import { RouterModule } from '@angular/router';
+import { ParticipantmanagementService } from '../../service/participantmanagement.service';
 
 @Component({
   selector: 'app-mailer',
@@ -23,7 +23,6 @@ import { RouterModule } from '@angular/router';
     MatFormFieldModule,
     MatSelectModule,
     QrcodeDisplayComponent,
-    RouterModule
   ],
   templateUrl: './mailer.component.html',
   styleUrl: './mailer.component.css'
@@ -44,7 +43,8 @@ export class MailerComponent {
     private qrCodeService: QRCodeService,
     private eventService: EventService,
     private changeDetectorRef: ChangeDetectorRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private participantService: ParticipantmanagementService,
   ) { }
 
   ngOnInit(): void {
@@ -64,10 +64,6 @@ export class MailerComponent {
       (response: any) => {
         if (response && response.payload && Array.isArray(response.payload)) {
           this.events = response.payload;
-          if (this.events.length > 0) {
-            this.selected = this.events[0].event_id;
-            this.generateQRCodeForSelectedEvent(); // Generate QR code for the initial selected event
-          }
         } else {
           console.error('Invalid response format:', response);
         }
@@ -79,12 +75,18 @@ export class MailerComponent {
   }
 
   sendEmail() {
+    // Check if any required field is empty
+    if (!this.recipientEmail || !this.emailSubject) {
+      this.openSnackBar('Please fill in all fields.');
+      return; // Stop execution if any field is empty
+    }
+  
     const emailData = {
       to: this.recipientEmail,
       subject: this.emailSubject,
       message: this.emailMessage.replace(/\n/g, '<br>'),
-      qrCodeImageUrl: this.qrCodeImageUrl, // Include QR code image URL
-      qrCodeData: this.qrCodeData // Include QR code data as base64 string
+      qrCodeImageUrl: this.qrCodeImageUrl,
+      qrCodeData: this.qrCodeData
     };
   
     this.emailService.sendEmail(emailData).subscribe(
@@ -99,7 +101,48 @@ export class MailerComponent {
       }
     );
   }
+  
     
+  sendEmailToParticipants() {
+    // Check if the subject field is empty
+    if (!this.emailSubject) {
+      this.openSnackBar('Please enter a subject.');
+      return; // Stop execution if the subject field is empty
+    }
+
+    this.participantService.getParticipants().subscribe(
+      (participants: any[]) => {
+        if (Array.isArray(participants) && participants.length > 0) {
+          participants.forEach(participant => {
+            const emailData = {
+              to: participant.email, // Send email to individual participant
+              subject: this.emailSubject,
+              message: this.emailMessage.replace(/\n/g, '<br>'),
+              qrCodeImageUrl: this.qrCodeImageUrl,
+              qrCodeData: this.qrCodeData
+            };
+
+            this.emailService.sendEmail(emailData).subscribe(
+              () => {
+                // Handle success if needed
+              },
+              (error: any) => {
+                console.error('Failed to send email to participant:', error);
+              }
+            );
+          });
+          this.openSnackBar('Emails sent to participants successfully');
+          this.resetForm();
+        } else {
+          console.error('No participants found.');
+        }
+      },
+      (error: any) => {
+        console.error('Failed to fetch participants:', error);
+      }
+    );
+  }
+  
 
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Close', {

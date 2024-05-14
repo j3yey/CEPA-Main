@@ -59,10 +59,21 @@ class Get extends GlobalMethods{
     }   
 
     public function get_info() {
-        $condition = "isArchived = 0"; // Condition to filter out archived participants
-        $response = $this->get_records('participants', $condition);
-        return $response; 
-    }
+        $sql = "SELECT * FROM participants WHERE isArchived = 0"; // Select non-archived participants
+        $stmt = $this->pdo->prepare($sql);
+        
+        try {
+            $stmt->execute();
+            $participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $participants;
+        } catch (PDOException $e) {
+            // Handle any potential errors
+            return [
+                "status" => "error",
+                "message" => $e->getMessage()
+            ];
+        }
+    }    
     
     public function get_attendees($eventId) {
         try {

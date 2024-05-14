@@ -224,7 +224,7 @@ public function sendEmail($data, $template = 'default') {
         ->data($qrCodeData)
         ->encoding(new Encoding('UTF-8'))
         ->errorCorrectionLevel(ErrorCorrectionLevel::High)
-        ->size(300)
+        ->size(150)
         ->margin(10)
         ->validateResult(false)
         ->build();
@@ -232,6 +232,18 @@ public function sendEmail($data, $template = 'default') {
     // Get the QR code image data
     $qrCodeContent = $qrCode->getString();
     $qrCodeImageUrl = 'data:image/png;base64,' . base64_encode($qrCodeContent);
+
+    // Define the path for the temporary QR code image
+    $tempDir = 'C:\xampp\htdocs\CEPA-Main\temp';
+    $tempImagePath = $tempDir . '\qr_code.png';
+
+    // Ensure the temp directory exists
+    if (!is_dir($tempDir)) {
+        mkdir($tempDir, 0777, true);
+    }
+
+    // Save the QR code image to a file
+    file_put_contents($tempImagePath, $qrCodeContent);
 
     // Initialize PHPMailer
     $mail = new PHPMailer(true);
@@ -275,19 +287,29 @@ public function sendEmail($data, $template = 'default') {
             'qrCodeData' => $qrCodeData // Pass other necessary data to the template
         ];
 
+        // Load the template and replace placeholders with actual data
         ob_start();
+        extract($templateData);
         include $templateFile;
         $emailContent = ob_get_clean();
-
+        
         // var_dump($emailContent);
 
         // Set email content
         $mail->isHTML(true); 
         $mail->Body = $emailContent;
 
+        // Attach the QR code image
+        $mail->AddEmbeddedImage($tempImagePath, 'qr_code_image');
+
         // Send email
         $mail->send();
         return ['success' => true, 'message' => 'Email sent successfully'];
+
+        // Delete the temporary QR code image
+        if (file_exists($tempImagePath)) {
+            unlink($tempImagePath);
+        }
     } catch (Exception $e) {
         // Log error
         error_log('Failed to send email: ' . $e->getMessage());
