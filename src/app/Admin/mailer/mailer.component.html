@@ -24,6 +24,7 @@
                     </mat-select>
                 </mat-form-field>                                                          
                 <p *ngIf="selected !== 'None'">Event Attendance Link: Attendance/{{ selected }}</p>
+
             </div>
             <!-- Display QR code for the selected event -->
             <div class="qrcode-container" *ngIf="qrCodeData">

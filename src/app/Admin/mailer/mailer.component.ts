@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { QrcodeDisplayComponent } from './qrcode/qrcode-display/qrcode-display.component';
 import { QRCodeService } from '../../service/qr-code.service';
 import { EventService } from '../../service/event.service';
+import { RouterModule } from '@angular/router';
 import { ParticipantmanagementService } from '../../service/participantmanagement.service';
 
 @Component({
@@ -23,6 +24,7 @@ import { ParticipantmanagementService } from '../../service/participantmanagemen
     MatFormFieldModule,
     MatSelectModule,
     QrcodeDisplayComponent,
+    RouterModule
   ],
   templateUrl: './mailer.component.html',
   styleUrl: './mailer.component.css'
@@ -64,6 +66,10 @@ export class MailerComponent {
       (response: any) => {
         if (response && response.payload && Array.isArray(response.payload)) {
           this.events = response.payload;
+          if (this.events.length > 0) {
+            this.selected = this.events[0].event_id;
+            this.generateQRCodeForSelectedEvent(); // Generate QR code for the initial selected event
+          }
         } else {
           console.error('Invalid response format:', response);
         }
@@ -76,7 +82,7 @@ export class MailerComponent {
 
   sendEmail() {
     // Check if any required field is empty
-    if (!this.recipientEmail || !this.emailSubject) {
+    if (!this.recipientEmail || !this.emailSubject || !this.emailMessage) {
       this.openSnackBar('Please fill in all fields.');
       return; // Stop execution if any field is empty
     }
@@ -104,24 +110,18 @@ export class MailerComponent {
   
     
   sendEmailToParticipants() {
-    // Check if the subject field is empty
-    if (!this.emailSubject) {
-      this.openSnackBar('Please enter a subject.');
-      return; // Stop execution if the subject field is empty
-    }
-
     this.participantService.getParticipants().subscribe(
       (participants: any[]) => {
         if (Array.isArray(participants) && participants.length > 0) {
           participants.forEach(participant => {
             const emailData = {
-              to: participant.email, // Send email to individual participant
+              to: participant.email, // Use participant's email address
               subject: this.emailSubject,
               message: this.emailMessage.replace(/\n/g, '<br>'),
               qrCodeImageUrl: this.qrCodeImageUrl,
               qrCodeData: this.qrCodeData
             };
-
+  
             this.emailService.sendEmail(emailData).subscribe(
               () => {
                 // Handle success if needed
