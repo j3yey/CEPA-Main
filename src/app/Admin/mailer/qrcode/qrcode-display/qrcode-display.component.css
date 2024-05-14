@@ -1,0 +1,4 @@
+.qrcode {
+    width: fit-content; /* Set the width to fit the content */
+    height: fit-content; /* Set the height to fit the content */
+}

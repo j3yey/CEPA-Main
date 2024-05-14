@@ -9,6 +9,17 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use Firebase\JWT\JWT;
+use chillerlan\QRCode\QROptions;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Writer\ValidationException;
+
 
 class Post extends GlobalMethods{
     private $pdo;
@@ -133,8 +144,8 @@ class Post extends GlobalMethods{
             return $this->sendPayload(null, "failed", $errmsg, 400);
         }
     }
-     
-     //Send Email no template
+
+      //Send Email no template
     //  public function sendEmail($data){
     //     // Check if $data is null
     //     if ($data === null) {
@@ -188,41 +199,52 @@ class Post extends GlobalMethods{
     // }
     
 // Enter public function below
-public function sendEmail($data, $template = 'default'){
+public function sendEmail($data, $template = 'default') {
     // Check if $data is null
     if ($data === null) {
         return ['success' => false, 'message' => 'Data is null'];
     }
 
-    // Construct the path to the template file
-    $templateFile = __DIR__ . '/../template/' . $template . '.php';
-    
-    // Check if the template file exists
-    if (!file_exists($templateFile)) {
-        return ['success' => false, 'message' => 'Template not found'];
+    // Extract eventId from qrCodeImageUrl
+    $pattern = '/attendance\/(\d+)/';
+    preg_match($pattern, $data->qrCodeImageUrl, $matches);
+    $eventId = isset($matches[1]) ? $matches[1] : null;
+
+    // Check if eventId is extracted successfully
+    if ($eventId === null) {
+        return ['success' => false, 'message' => 'Event ID not found in QR code URL'];
     }
-    
-    // Start output buffering to capture template content
-    ob_start();
-    
-    // Include the template file
-    include $templateFile;
-    
-    // Get the content of the template and clear output buffer
-    $emailContent = ob_get_clean();
+
+    // Construct the QR code data
+    $qrCodeData = 'http://localhost:4200/attendance/' . $eventId;
+
+    // Generate the QR code using the builder
+    $qrCode = Builder::create()
+        ->writer(new PngWriter())
+        ->data($qrCodeData)
+        ->encoding(new Encoding('UTF-8'))
+        ->errorCorrectionLevel(ErrorCorrectionLevel::High)
+        ->size(300)
+        ->margin(10)
+        ->validateResult(false)
+        ->build();
+
+    // Get the QR code image data
+    $qrCodeContent = $qrCode->getString();
+    $qrCodeImageUrl = 'data:image/png;base64,' . base64_encode($qrCodeContent);
 
     // Initialize PHPMailer
     $mail = new PHPMailer(true);
 
     try {
         // Configure SMTP settings
-        $mail->isSMTP();                                          
-        $mail->Host       = 'smtp.gmail.com';                     
-        $mail->SMTPAuth   = true;                                   
-        $mail->Username   = 'cepa.appdev@gmail.com';                
-        $mail->Password   = 'iiot dgrb rlxw mcas';                  
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
-        $mail->Port       = 465;                                    
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'cepa.appdev@gmail.com';
+        $mail->Password   = 'iiot dgrb rlxw mcas';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port       = 465;
 
         // Set sender
         $mail->setFrom('cepa.appdev@gmail.com', 'CEPA');
@@ -241,7 +263,25 @@ public function sendEmail($data, $template = 'default'){
             return ['success' => false, 'message' => 'Email subject is not provided'];
         }
 
-        // Set email content from template
+        // Load email content template
+        $templateFile = __DIR__ . '/../template/' . $template . '.php';
+        if (!file_exists($templateFile)) {
+            return ['success' => false, 'message' => 'Template not found'];
+        }
+
+        // Prepare template data
+        $templateData = [
+            'message' => $data->message, // Pass the message from $data to the template
+            'qrCodeData' => $qrCodeData // Pass other necessary data to the template
+        ];
+
+        ob_start();
+        include $templateFile;
+        $emailContent = ob_get_clean();
+
+        // var_dump($emailContent);
+
+        // Set email content
         $mail->isHTML(true); 
         $mail->Body = $emailContent;
 
@@ -249,9 +289,14 @@ public function sendEmail($data, $template = 'default'){
         $mail->send();
         return ['success' => true, 'message' => 'Email sent successfully'];
     } catch (Exception $e) {
-        return ['success' => false, 'message' => 'Failed to send email: ' . $mail->ErrorInfo];
+        // Log error
+        error_log('Failed to send email: ' . $e->getMessage());
+        return ['success' => false, 'message' => 'Failed to send email: ' . $e->getMessage()];
     }
 }
+
+
+
 
     public function submit_attendance($data) {
         // Check if participant exists, if not, insert them

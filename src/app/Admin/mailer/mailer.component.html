@@ -16,7 +16,24 @@
             <label for="message">Message:</label>
             <textarea id="message" name="message" rows="5" required [(ngModel)]="emailMessage"></textarea>
             <input type="hidden" name="htmlMessage" [value]="emailMessage">
-            <input type="submit" value="Send Email">
+            <div class="mat-field-container">
+                <mat-form-field>
+                    <mat-label>Select Event</mat-label>
+                    <mat-select [(value)]="selected" (change)="onEventSelectionChange()">
+                        <mat-option *ngFor="let event of events" [value]="event.event_id">{{ event.event_name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>                                                          
+                <p>Event Attendance Link: <a [routerLink]="'/attendance/' + selected">Attendance/{{ selected }}</a></p>
+            </div>
+            <!-- Display QR code for the selected event -->
+            <div class="qrcode-container" *ngIf="qrCodeData">
+                <app-qrcode-display [qrCodeData]="qrCodeData"></app-qrcode-display>
+                <button type="button" (click)="generateQRCodeForSelectedEventManually()">Generate QR Code</button>
+            </div>
+            <div class="button-container">
+                <input type="submit" value="Send Email">
+                <input type="submit" value="Send Email to Participants">
+            </div>
         </form>
     </div>
 </body>

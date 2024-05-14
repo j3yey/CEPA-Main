@@ -6,7 +6,7 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 5px 6px 7px 1px #afadad;
-    opacity: 0.9;
+    opacity: 0.94;
 }
 
 h1 {
@@ -21,16 +21,7 @@ label {
     font-weight: bold;
 }
 
-input[type="text"], textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
+input[type="text"], textarea,
 input[type="email"], textarea {
     width: 100%;
     padding: 10px;
@@ -41,55 +32,59 @@ input[type="email"], textarea {
     box-sizing: border-box;
 }
 
+.mat-field-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mat-field-container p{
+  margin-left: 20px;
+}
+
+.mat-form-field {
+  flex: 1;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 16px;
-    box-shadow: 5px 6px 7px 1px #afadad;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 5px 6px 7px 1px #afadad;
+  width: 48%;
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
-.success-notification {
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    background-color: #333; /* Dark background color */
-    color: #fff; /* Light text color */
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
-  }
-  
-  .success-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .success-content span {
-    margin-right: 10px;
-  }
-  
-  .close-button {
-    background-color: transparent;
-    color: red;
-    border: none;
-    padding: 0;
-    font-size: 20px; /* Adjust the size of the icon */
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  
-  .close-button:hover {
-    color: darkred; /* Darken the color on hover */
-  }
-  
+.qrcode-container {
+  position: relative;
+}
+
+.qrcode-container button {
+  position: absolute;
+  top: 55px;
+  left: 150px;
+  padding: 8px;
+  background-color: #4caf50; /* Change to green */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 2px 3px 4px 1px #afadad;
+}
+
+.qrcode-container button:hover {
+  background-color: #388e3c; /* Darker shade of green on hover */
+}

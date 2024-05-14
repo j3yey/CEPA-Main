@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +29,14 @@
             height: 125px; /* Set a fixed height */
         }
 
+        .qr-code {
+            margin: 20px auto;
+            width: 20px; /* Adjust the size of the QR code */
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+        }
+
         h1 {
             color: #333;
         }
@@ -44,10 +50,29 @@
     <div class="background-container"></div>    
     <div class="container">             
         <h1>Hello!</h1>
-            <p>I love you mga poge</p>
-            <!-- You can remove the <img> tag as it's not necessary for the background image -->
-            <p><?php echo $data->message; ?></p>
-            <p>Regards,<br>CEPA Team</p>
+        <p>I love you mga poge</p>
+        <p><?php echo $data->message; ?></p>
+        <!-- QR code will be generated here -->
+        <div class="qr-code">
+            <?php
+            // Include the QR code library
+            require_once 'C:\xampp\htdocs\CEPA-Main\vendor\autoload.php';
+
+            // Generate the QR code using the builder
+            $qrCode = Endroid\QrCode\Builder\Builder::create()
+                ->writer(new Endroid\QrCode\Writer\PngWriter())
+                ->data($qrCodeData)
+                ->encoding(new Endroid\QrCode\Encoding\Encoding('UTF-8'))
+                ->size(300)
+                ->margin(10)
+                ->validateResult(false)
+                ->build();
+
+            // Output the QR code
+            echo '<img src="data:image/png;base64,' . base64_encode($qrCode->getString()) . '" alt="QR Code Image">';
+            ?>
         </div>
+        <p>Regards,<br>CEPA Team</p>
+    </div>
 </body>
-</html>
+
