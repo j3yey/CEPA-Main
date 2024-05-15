@@ -117,4 +117,41 @@ class Get extends GlobalMethods{
             ];
         }
     }
+
+    public function get_participant_by_name($name) {
+        try {
+            $sql = "SELECT p.first_name, p.last_name, e.event_name, e.event_date, e.event_location, e.organizer
+                    FROM participants p
+                    JOIN attendance a ON p.participant_id = a.participant_id
+                    JOIN events e ON a.event_id = e.event_id
+                    WHERE p.first_name LIKE ? OR p.last_name LIKE ?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(["%$name%", "%$name%"]);
+            
+            $participants = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $participantName = $row['first_name'] . ' ' . $row['last_name'];
+                if (!isset($participants[$participantName])) {
+                    $participants[$participantName] = [
+                        'first_name' => $row['first_name'],
+                        'last_name' => $row['last_name'],
+                        'events' => []
+                    ];
+                }
+                $participants[$participantName]['events'][] = [
+                    'event_name' => $row['event_name'],
+                    'event_date' => $row['event_date'],
+                    'event_location' => $row['event_location'], // Include event location
+                    'organizer' => $row['organizer'] // Include organizer
+                ];
+            }
+            
+            return array_values($participants);
+        } catch(PDOException $e) {
+            return [
+                "status" => "error",
+                "message" => $e->getMessage()
+            ];
+        }
+    }    
 }

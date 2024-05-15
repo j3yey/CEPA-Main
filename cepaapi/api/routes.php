@@ -74,10 +74,20 @@
                         http_response_code(400); // Bad request status code
                     }
                     break;
-                    
+
                 case "getinfo":
                     echo json_encode($get->get_info()); // Call the get_events() method
                     break;
+                    
+                    case "getparticipant":
+                        if (isset($_GET['name'])) {
+                            $participantName = $_GET['name'];
+                            echo json_encode($get->get_participant_by_name($participantName));
+                        } else {
+                            echo "Participant name not provided";
+                            http_response_code(400); // Bad request status code
+                        }
+                        break;
 
                 default:
                     // Return a 403 response for unsupported requests
