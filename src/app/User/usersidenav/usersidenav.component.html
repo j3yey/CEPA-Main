@@ -1,7 +1,7 @@
   <mat-sidenav-container>
 
-    <mat-sidenav [opened]="opened ? 'true' : 'false'" mode="side">
-      <img src="assets/images/CEPAlogo2-removebg-preview.png" class="logo" alt="CEPAnav"> 
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" class="mat-sidenav" [opened]="!mobileQuery.matches">    
+      <img src="assets/images/CEPAlogo2-removebg-preview.png" class="logo" alt="CEPAnav">
         <mat-list class="side-nav-contet nav-list">
           <mat-list-item class="nav-list-item" (click)="navigateToHome()">
             <i class="fa-solid fa-house"></i>
@@ -20,7 +20,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
       <mat-toolbar>
-        <button mat-button (click)="opened = !opened" class="side-nav-tbutton" style="border: none; background-color: whitesmoke;">
+        <button mat-button (click)="snav.toggle()" class="side-nav-tbutton" style="border: none; background-color: whitesmoke;">
           <i class="fa-solid fa-bars-staggered side-toggle"></i>
         </button>  
         <div class="datetime-container">

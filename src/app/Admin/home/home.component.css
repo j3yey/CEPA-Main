@@ -1,17 +1,13 @@
+#barChart{
+    width: 1000px;
+    display: block;
+    margin: 25px auto;
+}
 .button {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-.pie img {
-    max-width: 42px;
-    max-height: 42px;
-    position: fixed;
-    margin-left: 260px;
-    margin-top: 45px;
-
-}
-
-.heading{
+.heading {
     padding-left: 40px;
     padding-top: 20px;
     padding-bottom: 7px;
@@ -25,28 +21,138 @@ hr {
     margin-right: 40px;
     display: flex;
 }
+
 .container {
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the start */
 }
-.box-title{
+
+.box-title {
     font-size: 1.3rem;
     margin-bottom: 0;
     margin-top: 1rem;
 }
-.box, .box1 {
-    display: inline-block;
+
+.box, .square1, .t-container {
     border-radius: 20px;
-    width: 350px;
-    height: 120px;
     background-color: white;
     border: 1px solid #ccc;
     box-sizing: border-box;
     text-align: center;
     box-shadow: 5px 6px 7px 1px #afadad;
-    margin: 50px 65px;
+    margin: 20px;
 }
 
-.number,.number1 {
+.box {
+    width: 350px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.number, .number1 {
     font-weight: 1000;
-    font-size: 40px;
+    font-size: 35px;
+}
+
+/*******First Box********/
+.t-container {
+    height: 150px;
+    width: 92%;
+    margin: auto;
+    margin-top: 25px;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    padding: 20px 20px 0 20px;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    text-align: center;
+}
+
+.horizontal-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.centered-item {
+    margin: 0 40px;
+}
+
+.rectangle-title {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    margin: 10px 0 0 0; /* Adjusted margin-top */
+}
+
+.rectangle-title1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: auto;
+}
+
+.number {
+    font-weight: 1000;
+    font-size: 1.5rem;
+    margin: auto; /* Add margin to separate number from title */
+}
+
+.square1 {
+    width: 1500px;
+    height: 400px;
+    justify-content: center;
+    margin: 15px auto;
+}
+
+.b-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 500px) {
+    .box, .square1, .t-container {
+        width: 90%; /* Adjust width to fit better on small screens */
+        margin: 10px 5%; /* Center with smaller right margin */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+    
+    .box {
+        height: auto; /* Allow height to adjust based on content */
+    }
+    
+    .number, .number1 {
+        font-size: 30px; /* Adjust font size for smaller screens */
+    }
+
+    .rectangle-title, .box-title {
+        font-size: 1.1rem; /* Adjust font size for smaller screens */
+    }
+
+    .rectangle-title1 {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+
+    .heading {
+        font-size: 24px; /* Adjust font size for smaller screens */
+        padding-left: 20px; /* Adjust padding for smaller screens */
+        padding-top: 10px; /* Adjust padding for smaller screens */
+        padding-bottom: 5px; /* Adjust padding for smaller screens */
+    }
+
+    hr {
+        margin-left: 20px; /* Adjust margin for smaller screens */
+        margin-right: 20px; /* Adjust margin for smaller screens */
+    }
+
+    .horizontal-container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    .centered-item {
+        margin: 10px 0; /* Adjust margin for smaller screens */
+    }
 }

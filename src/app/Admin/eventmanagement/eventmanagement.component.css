@@ -35,15 +35,15 @@
   
   .container {
     --box-per-row: 2;
-    --gap: 10px;
+    --gap: 2px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: var(--gap);
-    padding: 40px 20px 0 20px;
+    padding: 12px;
     width: auto; 
     overflow-y: auto;
-    margin: 20px auto;
+    margin-right: 5px;
     height: 535px; 
   }
   
@@ -52,16 +52,18 @@
     box-shadow: 5px 6px 7px 1px #afadad;
     border-radius: 20px;
     max-width: 360px;
-    min-width: auto;
+    width: 345px;
     height: 245px;
     background-color: white;
     border: 1px solid #ccc;
-    padding: 20px;
+    padding: 25px;
     box-sizing: border-box;
-    margin-right: 20px; 
+    margin-left: 20px;
+    margin-right: 1px;
     margin-bottom: 30px; 
     left: 20px;
   }
+  
   
   .mat-card h1 {
     text-align-last: left;
@@ -100,5 +102,24 @@
   }
   .button:hover{
     background-color: #0056b3;
+  }
+  .archived-label {
+    position: absolute; /* Position the label absolutely */
+    top: 10px; /* Adjust top position as needed */
+    right: 10px; /* Adjust right position as needed */
+    width: 10px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    border-radius: 50%; /* Make it a circle */
+    text-align: center;
+    line-height: 20px; /* Vertically center the text */
+    font-weight: bold;
+  }
+  
+  .archived-yes {
+    background-color: red;
+  }
+  
+  .archived-no {
+    background-color: green;
   }
   

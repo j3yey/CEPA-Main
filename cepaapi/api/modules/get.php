@@ -57,6 +57,12 @@ class Get extends GlobalMethods{
         $response = $this->get_records('events', null);
         return $response;
     }   
+    
+    public function get_events_userside() {
+        $condition = "archived = 0"; // Condition to filter out archived events
+        $response = $this->get_records('events', $condition);
+        return $response;
+    }  
 
     public function get_info() {
         $sql = "SELECT * FROM participants WHERE isArchived = 0"; // Select non-archived participants
@@ -153,5 +159,55 @@ class Get extends GlobalMethods{
                 "message" => $e->getMessage()
             ];
         }
-    }    
+    }
+
+    public function get_events_with_participant_counts() {
+        try {
+            $sql = "SELECT e.event_id, e.event_name, e.event_date, e.event_location, e.organizer, COUNT(a.participant_id) AS participant_count
+                    FROM events e
+                    LEFT JOIN attendance a ON e.event_id = a.event_id
+                    GROUP BY e.event_id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+
+            $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $events;
+        } catch(PDOException $e) {
+            // Handle any potential errors
+            return [
+                "status" => "error",
+                "message" => $e->getMessage()
+            ];
+        }
+    }
+
+    public function get_participants(){
+        $response = $this->get_records('participants',null);
+        return $response;
+    }
+    
+    public function get_totalEvents(){
+        $response = $this->get_records('events',null);
+        return $response;
+    }
+
+    // Inside the Get class
+    public function getMostParticipatedEvent() {
+        try {
+            $query = "SELECT e.event_name, COUNT(a.participant_id) as participant_count 
+                    FROM events e 
+                    JOIN attendance a ON e.event_id = a.event_id 
+                    GROUP BY e.event_name 
+                    ORDER BY participant_count DESC 
+                    LIMIT 1";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            return $result;
+        } catch (PDOException $e) {
+            // Handle database connection errors
+            return array('error' => 'Database error: ' . $e->getMessage());
+        }
+    }
 }

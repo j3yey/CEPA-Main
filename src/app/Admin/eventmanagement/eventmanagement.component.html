@@ -6,6 +6,7 @@
     <!-- Putboxes -->
     <div class="container">
       <mat-card *ngFor="let event of events; let i = index" class="mat-card" [ngClass]="{ 'even': i % 2 === 0, 'odd': i % 2 !== 0 }">
+        <div class="archived-label" [ngClass]="{ 'archived-yes': event.archived, 'archived-no': !event.archived }">{{ event.archived ? '' : '' }}</div>
         <mat-card-header>
           <mat-card-title class="event-name">{{ event.event_name }}</mat-card-title>
         </mat-card-header>

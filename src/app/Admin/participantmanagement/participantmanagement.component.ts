@@ -31,12 +31,13 @@ export class ParticipantmanagementComponent implements OnInit {
   fetchParticipants() {
     this.participantService.getParticipants().subscribe(
       (response: any) => {
-        if (response.status.remarks === 'success') {
-          this.participants = response.payload;
+        // console.log('Response:', response);
+        if (response && Array.isArray(response) && response.length > 0) {
+          this.participants = response;
           this.dataSource = new MatTableDataSource(this.participants);
-          console.log('participants:', this.participants);
+          // console.log('Participants:', this.participants);
         } else {
-          console.error('Failed to fetch participants:', response.status.message);
+          console.error('Failed to fetch participants: Invalid response format');
         }
       },
       (error) => {
@@ -44,14 +45,13 @@ export class ParticipantmanagementComponent implements OnInit {
       }
     );
   }
-
+  
   applyFilter() {
     this.dataSource.filter = this.searchValue.trim().toLowerCase();
   }
 
   editParticipant(participant: any) {
-    // Navigate to the attendance form with the participant's ID as a parameter
-    this.router.navigate(['/attendance', participant.participant_id]);
+
   }
 
   archiveParticipant(participant: any) {

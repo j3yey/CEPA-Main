@@ -1,73 +1,165 @@
-.heading{
-    padding-left: 40px;
-    padding-top: 20px;
-    padding-bottom: 7px;
-    font-weight: bold;
-    font-size: 30px;
+.heading {
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 7px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+hr {
+  align-items: center;
+  margin-left: 40px;
+  margin-right: 40px;
+  display: flex;
+}
+
+.addevent {
+  z-index: 1;
+  padding: 10px 20px;
+  font-size: .9rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 150px;
+  margin-left: 2.6rem;
+  margin-top: 20px;
+  box-shadow: 5px 6px 7px 1px #afadad;
+}
+
+.addevent:hover {
+  background-color: #0056b3;
 }
 
 .container {
-    --box-per-row: 4;
-    --gap: 75px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: var(--gap);
-    padding: 40px 108px 0 130px;
-    width: fit-content;
+  --box-per-row: 2;
+  --gap: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--gap);
+  padding: 12px;
+  width: auto; 
+  overflow-y: auto;
+  margin-right: 5px;
+  height: auto; 
 }
 
-.box, .box1, .box2, .box3, .box4, .box5 {
-    position: relative;
-    box-shadow: 5px 6px 7px 1px #afadad;
-    border-radius: 20px;
-    max-width: 360px;
-    min-width: 360px;
-    height: 200px;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-sizing: border-box;
-    width: calc(25% - var(--gap)); /* Adjust width to include the gap */
+.mat-card {
+  position: relative;
+  box-shadow: 5px 6px 7px 1px #afadad;
+  border-radius: 20px;
+  max-width: 360px;
+  width: 345px;
+  height: 245px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 25px;
+  box-sizing: border-box;
+  margin-left: 20px;
+  margin-right: 1px;
+  margin-bottom: 30px;
+}
+
+.mat-card h1 {
+  text-align-last: left;
+  margin: 0;
+}
+
+.mat-card hr {
+  text-align-last: left;
+  margin: 10px 0;
+}
+
+.mat-card p {
+  text-align-last: left;
+  margin: 5px 0;
+}
+
+.mat-card-actions {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 .button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width:100px;
-    box-shadow: 5px 6px 7px 1px #afadad;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100px;
+  box-shadow: 5px 6px 7px 1px #afadad;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
-.search-bar {
+.button:hover{
+  background-color: #0056b3;
+}
+
+  .search-bar {
     display: flex;
     align-items: center;
-    margin-bottom: 20px; /* Adjust as needed */
-    margin-left: 130px;
-    width: 500px;
-}
-
-.search-bar input[type="text"] {
+    margin-left: 50px; /* Adjust margin as needed */
+    margin-top: 20px;
+  }
+  
+  .search-bar input[type="text"] {
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #ddd; /* Add border */
     border-radius: 10px;
-    margin-right: 10px; /* Adjust as needed */
-    width: 500px; /* Adjust width as needed */
-}
-
-.search-bar button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
+    margin-right: 10px;
+    width: 300px; /* Adjust width as needed */
+    outline: none; /* Remove outline */
+  }
+  
+  .search-bar input[type="text"]:focus {
+    border-color: #007bff; /* Change border color on focus */
+  }
+  
+  .search-bar input[type="text"]::placeholder {
+    color: #aaa; /* Placeholder color */
+  }
+  
+  .search-bar button {
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
+    padding: 10px 15px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+  }
+  
+  .search-bar button:hover {
+    background-color: #0056b3; /* Change button background color on hover */
+  }
+
+  @media only screen and (max-width: 600px) {
+    .container {
+      --box-per-row: 1;
+      justify-content: center !important;
+      height: 75vh;
+    }
+  
+    .mat-card {
+      max-width: 95%;
+      width: calc(100% + 20%) !important;
+      margin-right: 0;
+      margin-left: 0;
+    }
+    .search-bar{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: auto;
+      margin-left: 0;
+      margin-bottom: 10px;
+  }
+  }
+

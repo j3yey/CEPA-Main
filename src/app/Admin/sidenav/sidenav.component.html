@@ -1,6 +1,7 @@
 <mat-sidenav-container>
 
-  <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" class="mat-sidenav">    <img src="assets/images/CEPAlogo2-removebg-preview.png" class="logo" alt="CEPAnav">
+  <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" class="mat-sidenav" [opened]="!mobileQuery.matches">    
+    <img src="assets/images/CEPAlogo2-removebg-preview.png" class="logo" alt="CEPAnav">
       <mat-list class="side-nav-contet nav-list"> 
         <mat-list-item class="nav-list-item" (click)="navigateToHome(); selectedNavItem = 'home'" [ngClass]="selectedNavItem === 'home' ? 'selected' : ''">
           <i class="fa-solid fa-house"></i>

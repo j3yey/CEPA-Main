@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -8,6 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import { CommonModule } from '@angular/common';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-usersidenav',
@@ -25,13 +26,26 @@ import { CommonModule } from '@angular/common';
   templateUrl: './usersidenav.component.html',
   styleUrl: './usersidenav.component.css'
 })
-export class UsersidenavComponent {
-  title = 'CEPA';
-  opened: boolean = true;
-  currentDateTime: Date = new Date();
+export class UsersidenavComponent implements OnDestroy{
+  currentDateTime = new Date();
+  selectedNavItem = '';
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
 
-  constructor(private router: Router) { }
-  
+  constructor(
+    private router: Router,
+    changeDetectorRef: ChangeDetectorRef, 
+    media: MediaMatcher
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
+  }
+
   navigateToHome() {
     this.router.navigate(['/user/userhome']);
   }

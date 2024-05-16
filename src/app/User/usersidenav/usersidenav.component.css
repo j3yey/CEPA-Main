@@ -103,6 +103,28 @@ mat-sidenav {
 
 @media screen and (max-width: 768px) {
   mat-sidenav {
-    width: 0 !important;
+    max-width: 240px; /* Adjust the max-width as needed */
+    min-width: 0;
+  } 
+  .mat-sidenav.mat-drawer-side {
+    width: 100%;
+  }
+.nav-list-item span {
+  margin-left: 5px;
+  text-transform: capitalize;
+}
+  mat-card{
+    width: 80px !important;
+  }
+  .datetime-container i {
+    font-size: 1rem; 
+    margin-right: 0.5rem;
+  }
+  .datetime-container span {
+    font-size: 1rem; 
+  }
+  .mat-toolbar{
+    padding: 15px 0px 15px 15px;
   }
 }
+

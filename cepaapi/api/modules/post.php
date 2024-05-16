@@ -400,6 +400,27 @@ public function sendEmail($data, $template = 'default') {
             return null;
         }
     }
+
+    public function update_event($eventId, $data) {
+        $sql = "UPDATE events SET event_name=?, event_date=?, event_location=?, organizer=?, description=? WHERE event_id=?";
+        
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([
+                $data->event_name,
+                $data->event_date,
+                $data->event_location,
+                $data->organizer,
+                $data->description,
+                $eventId // Use the provided event ID parameter
+            ]);
+            return $this->sendPayload(null, "success", "Successfully updated the event.", 200);
+        } catch (\PDOException $e) {
+            $errmsg = $e->getMessage();
+        }
+        return $this->sendPayload(null, "failed", $errmsg, 400);
+    }
+
     public function archiveParticipant($data) {
         $sql = "UPDATE participants SET isArchived = 1 WHERE participant_id = ?";
         
@@ -412,6 +433,17 @@ public function sendEmail($data, $template = 'default') {
             return $this->sendPayload(null, "failed", $errmsg, 400);
         }
     }
-    
-}
 
+    public function archive_event($event_id) {
+        $sql = "UPDATE events SET archived=1 WHERE event_id=?";
+        
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([$event_id]);
+            return $this->sendPayload(null, "success", "Successfully archived the event.", 200);
+        } catch (\PDOException $e) {
+            $errmsg = $e->getMessage();
+        }
+        return $this->sendPayload(null, "failed", $errmsg, 400);
+    }
+}

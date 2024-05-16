@@ -3,46 +3,23 @@
     <hr style="align-items: center; margin-left: 40px; margin-right: 40px; display: flex;">
 
     <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search...">
-        <button onclick="search()">Search</button>
+        <input type="text" id="searchInput" placeholder="Search..." (input)="filterEvents($event)">
     </div>
     
     <div class="container">
-        <div class="box">
-            <h1>Event Title</h1>
+        <mat-card *ngFor="let event of filteredEvents" class="mat-card">
+            <mat-card-header>
+                <mat-card-title class="event-name">{{ event.event_name }}</mat-card-title>
+            </mat-card-header>
             <hr>
-           <h1>Event Details.</h1>
-           <button class="button">Enter</button>
-        </div>
-        <div class="box1">
-            <h1>Event Title</h1>
-            <hr>
-           <h1>Event Details.</h1>
-           <button class="button">Enter</button>
-        </div>
-        <div class="box2">
-            <h1>Event Title</h1>
-            <hr>
-           <h1>Event Details.</h1>
-           <button class="button">Enter</button>
-        </div>
-        <div class="box3">
-            <h1>Event Title</h1>
-            <hr>
-           <h1>Event Details.</h1>
-           <button class="button">Enter</button>
-        </div>
-        <div class="box4">
-            <h1>Event Title</h1>
-            <hr>
-           <h1>Event Details.</h1>
-           <button class="button">Enter</button>
-        </div>
-        <div class="box5">
-            <h1>Event Title</h1>
-            <hr>
-           <h1>Event Details.</h1>
-           <button class="button">Enter</button>
-        </div>
+            <mat-card-content>
+                <p><strong>Event Date:</strong> {{ event.event_date }}</p>
+                <p><strong>Location:</strong> {{ event.event_location }}</p>
+                <p><strong>Organizer:</strong> {{ event.organizer }}</p>
+            </mat-card-content>
+            <mat-card-actions class="register1">
+                <button mat-button color="primary" (click)="openUserHomeDetailsDialog(event)" class="button">Enter</button>
+            </mat-card-actions>
+        </mat-card>
     </div>
     </body>

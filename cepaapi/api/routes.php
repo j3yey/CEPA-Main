@@ -64,6 +64,10 @@
                     echo json_encode($get->get_events()); // Call the get_events() method
                     break;
 
+                case "getevent_user":
+                    echo json_encode($get->get_events_userside()); 
+                    break;
+
                 case "getattendees":
                     if(isset($request[1])) {
                         $eventId = $request[1]; // Extract the event ID from the request
@@ -78,16 +82,33 @@
                 case "getinfo":
                     echo json_encode($get->get_info()); // Call the get_events() method
                     break;
-                    
-                    case "getparticipant":
-                        if (isset($_GET['name'])) {
-                            $participantName = $_GET['name'];
-                            echo json_encode($get->get_participant_by_name($participantName));
-                        } else {
-                            echo "Participant name not provided";
-                            http_response_code(400); // Bad request status code
-                        }
+
+                    case 'home_totalParticipants':
+                        echo json_encode($get->get_participants());
                         break;
+    
+                    case 'home_totalEvents':
+                        echo json_encode($get->get_totalEvents());
+                        break;
+    
+                    
+                    case 'mostparticipatedevent':
+                        echo json_encode($get->getMostParticipatedEvent());
+                        break;
+                    
+                case "getparticipant":
+                    if (isset($_GET['name'])) {
+                        $participantName = $_GET['name'];
+                        echo json_encode($get->get_participant_by_name($participantName));
+                    } else {
+                        echo "Participant name not provided";
+                        http_response_code(400); // Bad request status code
+                    }
+                    break;
+                    
+                case "get_events_with_participant_counts":
+                    echo json_encode($get->get_events_with_participant_counts());
+                    break;
 
                 default:
                     // Return a 403 response for unsupported requests
@@ -134,6 +155,27 @@
 
                 case 'archiveparticipant':
                     echo json_encode($post->archiveParticipant($data));
+                    break;
+
+                case 'update_event':
+                    if(isset($request[1])) {
+                        $eventId = $request[1]; // Extract the event ID from the request
+                        echo json_encode($post->update_event($eventId, $data));
+                    } else {
+                        // Handle the case where the event ID is not provided
+                        echo "Event ID not provided";
+                        http_response_code(400); // Bad request status code
+                    }
+                    break;
+                case 'archive_event':
+                    if(isset($request[1])) {
+                        $eventId = $request[1]; // Extract the event ID from the request
+                        echo json_encode($post->archive_event($eventId)); // Pass the event ID to the archive_event method
+                    } else {
+                         // Handle the case where the event ID is not provided
+                        echo "Event ID not provided";
+                        http_response_code(400); // Bad request status code
+                    }
                     break;
                 
                 default:
