@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HomeComponent } from './Admin/home/home.component';
 import { ParticipantmanagementComponent } from './Admin/participantmanagement/participantmanagement.component';
 import { EventmanagementComponent } from './Admin/eventmanagement/eventmanagement.component';
-import { AboutusComponent } from './Admin/aboutus/aboutus.component';
+import { AboutusComponent } from './User/aboutus/aboutus.component';
 import { LoginComponent } from './Admin/login/login.component';
 import { SidenavComponent } from './Admin/sidenav/sidenav.component';
 import { AttendanceComponent } from './attendance/attendance.component';
@@ -13,7 +13,6 @@ import { UsersidenavComponent } from './User/usersidenav/usersidenav.component';
 import { SearchparticipantComponent } from './User/searchparticipant/searchparticipant.component';
 import { FeedbackComponent } from './User/feedback/feedback.component';
 import { AdminAuthGuard } from './service/login/auth.guard';
-
 
 export const routes: Routes = [
   {
@@ -51,6 +50,10 @@ export const routes: Routes = [
         path: 'feedback',
         component: FeedbackComponent,
       },
+      {
+        path: 'AboutUs',
+        component: AboutusComponent,
+      },
     ]
   },
   {
@@ -61,7 +64,7 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
-      },
+      },  
       {
         path: 'eventmanagement',
         component: EventmanagementComponent,
@@ -73,10 +76,6 @@ export const routes: Routes = [
       {
         path: 'mailer',
         component: MailerComponent,
-      },
-      {
-        path: 'AboutUs',
-        component: AboutusComponent,
       },
     ],
   },
@@ -90,5 +89,7 @@ export const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
+
+    
 })
 export class AppRoutingModule { }

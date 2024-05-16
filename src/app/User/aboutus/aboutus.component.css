@@ -1,0 +1,126 @@
+button{
+    box-shadow: 5px 6px 7px 1px #afadad;
+    color: white;
+    background-color:#4070f4;
+    border-radius: 7px;
+    width:140px;
+    height: 30px;
+    size: 20px;
+    right: 33px;
+    border: none;
+    text-align:center;
+    position: fixed;
+    margin-top: 45vh;
+    margin-right: 10px;
+}
+.aboutus{
+    padding: 45px;
+    padding-top: 30px;
+    position: relative;
+    max-width: fit-content;
+    
+}
+
+
+h1{
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 7px;
+    font-weight: bold;
+    font-size: 30px;
+}
+p{
+    margin-left: 10px;
+    max-width: fit-content;
+    display:flex;
+}
+#header{
+    margin-bottom: 2%;
+}
+hr{
+    align-items: center;
+     margin-left: 40px;
+     margin-right: 40px;
+     display: flex;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ccc;
+    color: #333;
+    cursor: pointer;
+    margin-top:430px;
+    margin-right:520px;
+  }
+  
+  .close-btn:hover {
+    background-color: #aaa;
+  }
+  mat-card {
+    height: auto; /* Instead of fixed height, use auto to adjust according to content */
+    margin: auto; /* Center the card horizontally */
+    max-width: 90%; /* Set maximum width to make it responsive */
+    display: block;
+    padding: 20px; /* Add padding for better spacing */
+  }
+  .fixed-button {
+    position: absolute;
+    top: -340px; /* Adjust this value to your preference */
+    right: -10px; /* Adjust this value to your preference */
+    z-index: 1000; /* Ensure the button appears on top of other elements */
+  }
+  
+  .content {
+    position: relative; /* Ensure positioning context for absolute positioning */
+  }
+
+   .socmed{
+      position: absolute;
+      top: -340px; /* Adjust this value to your preference */
+      right: 34px; /* Adjust this value to your preference */
+      z-index: 1000; /* Ensure the button appears on top of other elements */
+    }
+    
+  
+  
+
+
+.aboutus {
+    padding: 10px !important;
+    position: relative; /* Add relative positioning to create a stacking context */
+}
+
+.aboutus p {
+    font-size: 12px;
+}
+.facebook{
+  color:blue;
+  text-decoration: none;
+  display: block; /* Make the link a block element */
+  width: fit-content; /* Set width to fit content */
+  margin: 0 auto; /* Center the link horizontally */
+  text-align: center; /* Center the text within the link */
+}
+a.facebook:hover{
+  
+  text-decoration: underline;
+}
+@media screen and (min-width:300px) and (min-height:600px) {
+  .fixed-button{
+    margin-top:315px;
+    margin-right:-10px;
+  }
+   .socmed{
+    margin-top:315px;
+    margin-right:90px;
+   }
+  }
+  
+ 
+    
+      

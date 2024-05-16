@@ -1,0 +1,34 @@
+
+<body>
+  <h1>About Us <i class="fa-solid fa-circle-info"></i></h1>
+  <hr>
+  <mat-card>
+    <mat-card-content class="content">
+      <div class="aboutus">
+        <p id="header"><b>Welcome to the Community Extension Participation Attendance platform!</b></p>
+        <div class="viewteam">
+        <!-- Button placed inside the content -->
+        <button mat-button class="fixed-button" (click)="openDialog()" style="color:white; ">View Team</button>
+        <button mat-button [matMenuTriggerFor]="menu" #menuTrigger class="socmed" style="color:white;" >Social Media</button>
+<mat-menu #menu="matMenu" >
+  <a href="https://www.facebook.com/profile.php?id=61558859517067" target="blank" class="facebook"> Facebook</a>
+</mat-menu>
+      </div>
+        
+        <p>We are a team of 2nd Year Bachelor of Science in Information Technology Students of Gordon College and We designed a digital platform to simplify the process of discovering and engaging in extension events and activities within your community.  
+            We realize the significance of remaining connected and participating, so we've built a single hub where everyone can quickly find and attend workshops, meetups, and special events.</p>
+  
+        <p><b>Comprehensive Event Listings</b></p>
+        <p>Our platform organizes a wide range of events, including instructional sessions and recreational meetings. Everything is properly arranged and easily accessible, so you'll never miss out on great activities in your community.</p>
+        <p><b>Participant Engagement</b></p>
+        <p>Discover who else is going to an event before you arrive. Our participant listings enable you to interact with like-minded people, forming new relationships and networks in your neighborhood.</p>
+        <p><b>Seamless Communication Tools</b></p>
+        <p>Using our integrated communication capabilities, you can easily engage with event organizers and other participants. Whether it's managing logistics or sharing insights, staying in touch has never been easier.</p>
+        <p><b>Attendance and Participation Tracking</b></p>
+        <p>We believe in continual improvement. By tracking attendance and collecting feedback, we receive vital insights into what our community values. This data enables us to improve upcoming events and experiences.</p>
+        <p><b>We're here to help you connect, collaborate, and make a difference in your community. Whether you're planning events or looking to get involved, our online platform is designed to foster community, engagement, and participation in extension activities. Join us and be part of something meaningful!</b></p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+    </body>

@@ -58,6 +58,9 @@ export class UsersidenavComponent implements OnDestroy{
     this.router.navigate(['/user/feedback']);
   }
 
+  navigateToAboutUs() {
+    this.router.navigate(['/user/AboutUs']);
+  }
 
   ngOnInit(): void {    
     setInterval(() => {

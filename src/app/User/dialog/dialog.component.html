@@ -1,0 +1,27 @@
+
+<mat-card>
+  <mat-card-content>
+    <mat-grid-list cols="12" rowHeight="100px" class="custom-grid">
+      <ng-container *ngFor="let tile of tiles; let i = index">
+        <mat-grid-tile [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+          <!-- Link wrapping the image -->
+          <a [href]="tile.link" target="_blank">
+            <!-- Image tag with specific width and height -->
+            <img [src]="tile.imagePath" alt="Image {{i + 1}}" width="120" height="120">
+          </a>
+          <!-- Text for position and name -->
+          <div class="image-info" [ngStyle]="{'margin-top': i >= tiles.length - 4 ? '10px' : '0', 'grid-column-start': i >= tiles.length - 4 ? 'auto' : 'unset', 'grid-row-start': i >= tiles.length - 4 ? 'auto' : 'unset'}">
+            <p><b>{{tile.title}}</b></p>
+            
+            <p>{{tile.name}}</p>
+          </div>
+        </mat-grid-tile>
+      </ng-container>
+    </mat-grid-list>
+  </mat-card-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close style="background-color: #e4e9f7;">Cancel</button>
+    
+  </mat-dialog-actions>
+</mat-card>
+
