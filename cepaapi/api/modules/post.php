@@ -446,4 +446,24 @@ public function sendEmail($data, $template = 'default') {
         }
         return $this->sendPayload(null, "failed", $errmsg, 400);
     }
+
+    public function update_participant($participantId, $data) {
+        // Ensure no trailing comma in the SQL query
+        $sql = "UPDATE participants SET first_name=?, last_name=?, email=?, phone_number=? WHERE participant_id=?";
+        
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([
+                $data->first_name,
+                $data->last_name,
+                $data->email,
+                $data->phone_number,
+                $participantId // Use the provided participant ID parameter
+            ]);
+            return $this->sendPayload(null, "success", "Successfully updated the participant.", 200);
+        } catch (\PDOException $e) {
+            $errmsg = $e->getMessage();
+            return $this->sendPayload(null, "failed", $errmsg, 400);
+        }
+    }
 }

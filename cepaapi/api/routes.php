@@ -167,6 +167,19 @@
                         http_response_code(400); // Bad request status code
                     }
                     break;
+
+                case 'update_participant':
+                    if(isset($request[1])) {
+                        $participantId = $request[1]; // Extract the participant ID from the request
+                        // Assuming $data contains the updated participant information
+                        echo json_encode($post->update_participant($participantId, $data));
+                    } else {
+                        // Handle the case where the participant ID is not provided
+                        echo "Participant ID not provided";
+                        http_response_code(400); // Bad request status code
+                    }
+                    break;
+
                 case 'archive_event':
                     if(isset($request[1])) {
                         $eventId = $request[1]; // Extract the event ID from the request

@@ -22,4 +22,9 @@ export class ParticipantmanagementService {
   archiveParticipant(participant: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'archiveparticipant', participant);
   }
+  
+  updateParticipantDetails(participantId: number, participantData: any): Observable<any> {
+    console.log('Updating participant with ID:', participantId); // Add this line
+    return this.http.post<any>(this.apiUrl + 'update_participant/' + participantId, participantData);
+  }
 }

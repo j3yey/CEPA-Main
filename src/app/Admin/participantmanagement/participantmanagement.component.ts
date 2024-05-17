@@ -7,6 +7,8 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
+import { EditParticipantComponent } from './edit-participant/edit-participant.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   
@@ -21,7 +23,8 @@ export class ParticipantmanagementComponent implements OnInit {
 
   constructor(
     private participantService: ParticipantmanagementService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -50,10 +53,6 @@ export class ParticipantmanagementComponent implements OnInit {
     this.dataSource.filter = this.searchValue.trim().toLowerCase();
   }
 
-  editParticipant(participant: any) {
-
-  }
-
   archiveParticipant(participant: any) {
     this.participantService.archiveParticipant(participant).subscribe(
       (response: any) => {
@@ -74,6 +73,20 @@ export class ParticipantmanagementComponent implements OnInit {
       }
     );
   }
+
+  openEditModal(participant: any): void {
+    const dialogRef = this.dialog.open(EditParticipantComponent, {
+      width: '442px',
+      data: { participant }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // Handle any actions after modal is closed
+    });
+  }
+
+  
 }
 @NgModule({
   imports: [MatTableModule, MatIconModule, MatFormField, FormsModule, MatInputModule, MatCardModule],
