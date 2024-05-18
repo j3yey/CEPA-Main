@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(id: string, password: string) {
-    return this.http.post<any>('http://localhost/CEPA-Main/cepaapi/api/login', { id, password })
+    return this.http.post<any>('https://itcepacommunity.com/cepaapi/api/login', { id, password })
       .pipe(
         map(response => {
           // Check if token exists in the response

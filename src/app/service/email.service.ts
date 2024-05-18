@@ -10,7 +10,7 @@ export class EmailService {
 
   sendEmail(emailData: any): Observable<any> {
     // Assuming you have an API endpoint to send emails
-    const APIurl = 'http://localhost/CEPA-Main/cepaapi/api/sendemail';
+    const APIurl = 'https://itcepacommunity.com/cepaapi/api/sendemail';
     return this.http.post(APIurl, emailData);
   }
 }

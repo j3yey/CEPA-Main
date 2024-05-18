@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AttendanceService {
-  private apiUrl = 'http://localhost/CEPA-Main/cepaapi/api/';
+  private apiUrl = 'https://itcepacommunity.com/cepaapi/api/';
 
   constructor(private http: HttpClient) { }
 

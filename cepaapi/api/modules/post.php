@@ -216,7 +216,7 @@ public function sendEmail($data, $template = 'default') {
     }
 
     // Construct the QR code data
-    $qrCodeData = 'http://localhost:4200/attendance/' . $eventId;
+    $qrCodeData = 'http://itcepacommunity.com/attendance/' . $eventId;
 
     // Generate the QR code using the builder
     $qrCode = Builder::create()

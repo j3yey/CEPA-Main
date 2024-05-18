@@ -8,10 +8,10 @@ date_default_timezone_set("Asia/Manila");
 set_time_limit(1000);
 
 //define constants for server credentials/configuration
-define("SERVER", "localhost");
-define("DATABASE", "cepa_db");
-define("USER", "root");
-define("PASSWORD", "");
+define("SERVER", "srv1319.hstgr.io");
+define("DATABASE", "u475125807_cepa_db");
+define("USER", "u475125807_cepa");
+define("PASSWORD", "Itcepa2024");
 define("DRIVER", "mysql");
 
 class Connection{

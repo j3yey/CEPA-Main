@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SearchparticipantService {
-  private apiUrl = 'http://localhost/CEPA-Main/cepaapi/api/getparticipant'; // Update this URL to your actual API endpoint
+  private apiUrl = 'https://itcepacommunity.com/cepaapi/api/getparticipant'; // Update this URL to your actual API endpoint
 
   constructor(private http: HttpClient) {}
 
