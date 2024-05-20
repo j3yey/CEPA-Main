@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FeedbackService {
-  private apiUrl = 'https://itcepacommunity.com/cepaapi/api/submitfeedback';
+  private apiUrl = 'https://itcepacommunity.com/cepaapi/submitfeedback';
 
   constructor(private http: HttpClient) { }
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HomeService {
-  private apiUrl = 'https://itcepacommunity.com/cepaapi/api/';
+  private apiUrl = 'https://itcepacommunity.com/cepaapi/';
 
   constructor(private http: HttpClient) { }
 

@@ -6,7 +6,7 @@
     providedIn: 'root',
   })
   export class EventService {
-    private apiUrl = 'https://itcepacommunity.com/cepaapi/api/';
+    private apiUrl = 'https://itcepacommunity.com/cepaapi/';
     private eventsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
     constructor(private http: HttpClient) { }

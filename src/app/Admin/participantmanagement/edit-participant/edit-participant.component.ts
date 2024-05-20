@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-participant-modal',
-  imports: [ReactiveFormsModule,FormsModule, FormsModule],
+  imports: [ReactiveFormsModule,FormsModule],
   standalone: true,
   templateUrl: './edit-participant.component.html',
   styleUrls: ['./edit-participant.component.css']

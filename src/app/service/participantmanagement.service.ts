@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ParticipantmanagementService {
 
-  private apiUrl = 'https://itcepacommunity.com/cepaapi/api/';
+  private apiUrl = 'https://itcepacommunity.com/cepaapi/';
 
   constructor(private http: HttpClient) { }
 
