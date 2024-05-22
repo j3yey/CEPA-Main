@@ -12,7 +12,7 @@ export class QRCodeService {
     return new Observable<string>((observer) => {
       this.dataService.getEventDetails(eventId).subscribe(
         (eventDetails: any) => {
-          const qrCodeData = `/attendance/${eventId}`;
+          const qrCodeData = `http://itcepacommunity.com/attendance/${eventId}`;
           observer.next(qrCodeData);
           observer.complete();
         },
