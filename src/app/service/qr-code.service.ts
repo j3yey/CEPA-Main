@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { EventService } from './event.service';
 import { Observable } from 'rxjs';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QRCodeService {
-  constructor(private eventService: EventService) { }
+  constructor(private dataService: DataService) { }
 
   generateQRCodeData(eventId: string): Observable<string> {
     return new Observable<string>((observer) => {
-      this.eventService.getEventDetails(eventId).subscribe(
+      this.dataService.getEventDetails(eventId).subscribe(
         (eventDetails: any) => {
           const qrCodeData = `/attendance/${eventId}`;
           observer.next(qrCodeData);

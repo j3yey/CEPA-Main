@@ -18,7 +18,7 @@ export const routes: Routes = [
   {
     path: 'admin/login',
     component: LoginComponent,
-      canActivate: [AdminAuthGuard]
+    canActivate: [AdminAuthGuard]
   },
   {
     path: 'user',

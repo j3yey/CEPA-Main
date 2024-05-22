@@ -3,12 +3,12 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
-import { FeedbackService } from '../../service/feedback.service';
 import {MatCardModule} from '@angular/material/card';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-feedback',
-   standalone: true,
+  standalone: true,
   imports: [MatRadioModule,MatFormFieldModule,MatDividerModule,FormsModule,MatCardModule],
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.css']
@@ -21,7 +21,7 @@ export class FeedbackComponent {
   selectedQ5Answer: string = '';
   feedback: string = '';
 
-  constructor(private feedbackService: FeedbackService) { } // Inject FeedbackService
+  constructor(private dataService: DataService) { } // Inject FeedbackService
 
   submitFeedback(form: NgForm) {
     const feedbackData = {
@@ -33,7 +33,7 @@ export class FeedbackComponent {
       feedback: this.feedback
     };
   
-    this.feedbackService.submitFeedback(feedbackData).subscribe(response => {
+    this.dataService.submitFeedback(feedbackData).subscribe(response => {
       console.log('Feedback submitted successfully:', response);
       form.reset(); // Clear form after successful submission
       this.selectedQ1Answer = ''; // Reset selected radio button for question 1

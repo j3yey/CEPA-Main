@@ -4,14 +4,13 @@ import { Router } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { AttendanceService } from '../../../service/attendance.service';
 import { QRCodeModule } from 'angularx-qrcode';
 import { CommonModule } from '@angular/common';
 import { QRCodeService } from '../../../service/qr-code.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateValidator } from '../../../service/date-validator.service';
-import { EventService } from '../../../service/event.service';
+import { DataService } from '../../../service/data.service';
 
 @Component({
   selector: 'app-eventdetails',
@@ -32,9 +31,8 @@ export class EventdetailsComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router,
     private dialogRef: MatDialogRef<EventdetailsComponent>,
-    private attendanceService: AttendanceService,
+    private dataService: DataService,
     private formBuilder: FormBuilder,
-    private eventService: EventService,
     private dateValidator: DateValidator, 
     private snackBar: MatSnackBar,
     private qrCodeService: QRCodeService // Inject QRCodeService
@@ -52,7 +50,7 @@ export class EventdetailsComponent {
 updateEventDetails() {
   if (this.updateForm.valid) {
     const updatedEventData = this.updateForm.value;
-    this.eventService.updateEventDetails(this.data.event_id, updatedEventData).subscribe(
+    this.dataService.updateEventDetails(this.data.event_id, updatedEventData).subscribe(
       (response: any) => {
         console.log('Event details updated successfully:', response);
         this.data = updatedEventData;
@@ -67,7 +65,7 @@ updateEventDetails() {
 
 deleteEvent() {
   if (confirm('Are you sure you want to delete this event?')) {
-    this.eventService.archiveEvent(this.data.event_id).subscribe(
+    this.dataService.archiveEvent(this.data.event_id).subscribe(
       (response: any) => {
         console.log('Event archived successfully:', response);
         this.dialogRef.close();
@@ -82,7 +80,7 @@ deleteEvent() {
 
 
 reloadEvents() {
-  this.eventService.getAllEvents().subscribe(
+  this.dataService.getAllEvents().subscribe(
     (events: any[]) => {},
     error => {
       console.error('Failed to fetch events:', error);
@@ -92,7 +90,7 @@ reloadEvents() {
 
 
 fetchAttendanceData() {
-  this.attendanceService.getAttendanceForEvent(this.data.event_id).subscribe(
+  this.dataService.getAttendanceForEvent(this.data.event_id).subscribe(
     (response: any) => {
       this.attendanceData = response;
       this.dataSource.data = this.attendanceData; 
@@ -105,7 +103,7 @@ fetchAttendanceData() {
 
   ngOnInit() {
     // Fetch attendance data for the current event
-    this.attendanceService.getAttendanceForEvent(this.data.event_id).subscribe(
+    this.dataService.getAttendanceForEvent(this.data.event_id).subscribe(
       (response: any) => {
         this.attendanceData = response; // Assign fetched attendance data to attendanceData
       },

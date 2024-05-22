@@ -1,13 +1,13 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ParticipantmanagementService } from '../../../service/participantmanagement.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DataService } from '../../../service/data.service';
 
 
 @Component({
   selector: 'app-edit-participant-modal',
-  imports: [ReactiveFormsModule,FormsModule],
+  imports: [ReactiveFormsModule,FormsModule, FormsModule],
   standalone: true,
   templateUrl: './edit-participant.component.html',
   styleUrls: ['./edit-participant.component.css']
@@ -18,7 +18,7 @@ export class EditParticipantComponent {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<EditParticipantComponent>,
-    private participantService: ParticipantmanagementService,
+    private dataService: DataService,
     private snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef, // Inject ChangeDetectorRef
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -36,7 +36,7 @@ export class EditParticipantComponent {
     if (this.updateForm.valid) {
       const updatedParticipantData = this.updateForm.value;
       const participantId = this.data.participant.participant_id;
-      this.participantService.updateParticipantDetails(participantId, updatedParticipantData).subscribe(
+      this.dataService.updateParticipantDetails(participantId, updatedParticipantData).subscribe(
         (response: any) => {
           console.log('Participant details updated successfully:', response);
           this.openSnackBar('Participant details updated successfully'); // Display success snack bar

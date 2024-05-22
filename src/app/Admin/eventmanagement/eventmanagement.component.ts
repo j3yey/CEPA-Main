@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EventService } from '../../service/event.service';
 import { AddeventformComponent } from './addeventform/addeventform.component';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { EventdetailsComponent } from './eventdetails/eventdetails.component';
 import { Router } from '@angular/router';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-eventmanagement',
-  providers: [EventService],
+  providers: [DataService],
   standalone: true,
   imports: [CommonModule, MatCardModule, MatGridListModule],
   templateUrl: './eventmanagement.component.html',
@@ -21,7 +21,7 @@ export class EventmanagementComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private eventService: EventService,
+    private dataService: DataService,
     private router: Router
   ) {}
 
@@ -40,7 +40,7 @@ export class EventmanagementComponent implements OnInit {
     }
 
     loadEvents() {
-      this.eventService.getAllEvents().subscribe(
+      this.dataService.getAllEvents().subscribe(
         (response: any) => {
           if (response.status.remarks === 'success') {
             this.events = response.payload;

@@ -8,8 +8,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../service/login/auth.service';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -36,7 +36,7 @@ export class SidenavComponent implements OnDestroy{
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    private dataService: DataService,
     changeDetectorRef: ChangeDetectorRef, 
     media: MediaMatcher
   ) {
@@ -81,7 +81,7 @@ export class SidenavComponent implements OnDestroy{
   }
 
   redirectToAdminLogin() {
-    this.authService.logout(); // Call logout method from AuthService
+    this.dataService.logout(); // Call logout method from DataService
     this.router.navigate(['admin/login']);
   }
 }

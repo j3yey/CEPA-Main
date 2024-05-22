@@ -1,10 +1,10 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EventService } from '../../service/event.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { UserhomedetailsComponent } from './userhomedetails/userhomedetails.component';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-userhome',
@@ -17,7 +17,7 @@ export class UserhomeComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private eventService: EventService,
+    private dataService: DataService,
     private router: Router
   ) {}
 
@@ -26,7 +26,7 @@ export class UserhomeComponent implements OnInit {
   }
 
   loadEvents() {
-    this.eventService.getAllEventsUser().subscribe(
+    this.dataService.getAllEventsUser().subscribe(
       (response: any) => {
         if (response.status?.remarks === 'success') { // perform null check here
           this.events = response.payload || []; // perform null check here and assign empty array if null
@@ -44,7 +44,7 @@ export class UserhomeComponent implements OnInit {
 
   openUserHomeDetailsDialog(event: any) {
     this.dialog.open(UserhomedetailsComponent, {
-      data: event,
+      data: event,  
       width: '90%', // Default width of the dialog
       maxWidth: '844px', // Default maximum width of the dialog
     });
