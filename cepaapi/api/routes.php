@@ -36,6 +36,7 @@
     require_once "./modules/post.php";
     require_once "./config/database.php";
     
+    
     $con = new Connection();
     $pdo = $con->connect();
     

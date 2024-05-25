@@ -110,6 +110,7 @@ a.facebook:hover{
   
   text-decoration: underline;
 }
+
 @media screen and (min-width:300px) and (min-height:600px) {
   .fixed-button{
     margin-top:315px;
