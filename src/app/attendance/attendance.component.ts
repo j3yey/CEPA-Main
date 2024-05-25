@@ -1,10 +1,9 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AttendanceService } from '../service/attendance.service';
 import { ActivatedRoute } from '@angular/router';
-import { EventService } from '../service/event.service';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-attendance',
@@ -19,8 +18,7 @@ export class AttendanceComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private fb: FormBuilder, 
-    private eventService: EventService,
-    private attendanceService: AttendanceService,
+    private dataService: DataService,
     private route: ActivatedRoute
   ) { }
 
@@ -44,7 +42,7 @@ initializeForm() {
 }
 
 fetchEventDetails(eventId: string) {
-    this.eventService.getEventDetails(eventId).subscribe(
+    this.dataService.getEventDetails(eventId).subscribe(
         (eventDetails: any) => {
             console.log('Event Details:', eventDetails);
             const firstEvent = eventDetails?.payload?.[0]; // Access the first event if exists
@@ -77,7 +75,7 @@ onSubmit() {
     attendance_date: new Date().toISOString().slice(0, 10)
   };
 
-  this.attendanceService.submitAttendance(data).subscribe(
+  this.dataService.submitAttendance(data).subscribe(
     response => {
       console.log('Attendance submitted successfully:', response);
       this.form.reset();

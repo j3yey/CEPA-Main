@@ -3,15 +3,13 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { EmailService } from '../../service/email.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { QrcodeDisplayComponent } from './qrcode/qrcode-display/qrcode-display.component';
 import { QRCodeService } from '../../service/qr-code.service';
-import { EventService } from '../../service/event.service';
 import { RouterModule } from '@angular/router';
-import { ParticipantmanagementService } from '../../service/participantmanagement.service';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-mailer',
@@ -40,13 +38,11 @@ export class MailerComponent {
   qrCodeImageUrl: string = ''; // URL of the generated QR code image
   qrCodeData: string = '';
 
-  constructor(private emailService: EmailService, 
+  constructor(private dataService: DataService,
     private snackBar: MatSnackBar, 
     private qrCodeService: QRCodeService,
-    private eventService: EventService,
     private changeDetectorRef: ChangeDetectorRef,
     private ngZone: NgZone,
-    private participantService: ParticipantmanagementService,
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +58,7 @@ export class MailerComponent {
   }
 
   loadEvents() {
-    this.eventService.getAllEvents().subscribe(
+    this.dataService.getAllEvents().subscribe(
       (response: any) => {
         if (response && response.payload && Array.isArray(response.payload)) {
           this.events = response.payload;
@@ -95,7 +91,7 @@ export class MailerComponent {
       qrCodeData: this.qrCodeData
     };
   
-    this.emailService.sendEmail(emailData).subscribe(
+    this.dataService.sendEmail(emailData).subscribe(
       () => {
         this.emailSent = true;
         this.openSnackBar('Email sent successfully');
@@ -110,7 +106,7 @@ export class MailerComponent {
   
     
   sendEmailToParticipants() {
-    this.participantService.getParticipants().subscribe(
+    this.dataService.getParticipants().subscribe(
       (participants: any[]) => {
         if (Array.isArray(participants) && participants.length > 0) {
           participants.forEach(participant => {
@@ -122,7 +118,7 @@ export class MailerComponent {
               qrCodeData: this.qrCodeData
             };
   
-            this.emailService.sendEmail(emailData).subscribe(
+            this.dataService.sendEmail(emailData).subscribe(
               () => {
                 // Handle success if needed
               },

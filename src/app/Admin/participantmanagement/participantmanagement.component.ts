@@ -1,6 +1,5 @@
 import { Component,NgModule, OnInit } from '@angular/core';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { ParticipantmanagementService } from '../../service/participantmanagement.service';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { MatFormField } from '@angular/material/form-field';
@@ -9,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { EditParticipantComponent } from './edit-participant/edit-participant.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DataService } from '../../service/data.service';
 
 @Component({
   
@@ -22,7 +22,7 @@ export class ParticipantmanagementComponent implements OnInit {
   searchValue: string = '';
 
   constructor(
-    private participantService: ParticipantmanagementService,
+    private dataService: DataService,
     private router: Router,
     private dialog: MatDialog
   ) {}
@@ -32,7 +32,7 @@ export class ParticipantmanagementComponent implements OnInit {
   }
 
   fetchParticipants() {
-    this.participantService.getParticipants().subscribe(
+    this.dataService.getParticipants().subscribe(
       (response: any) => {
         // console.log('Response:', response);
         if (response && Array.isArray(response) && response.length > 0) {
@@ -54,7 +54,7 @@ export class ParticipantmanagementComponent implements OnInit {
   }
 
   archiveParticipant(participant: any) {
-    this.participantService.archiveParticipant(participant).subscribe(
+    this.dataService.archiveParticipant(participant).subscribe(
       (response: any) => {
         if (response.status === 'success') {
           // Refresh the list of participants after successful archiving

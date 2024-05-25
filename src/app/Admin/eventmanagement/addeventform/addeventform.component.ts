@@ -1,8 +1,8 @@
 import { Component, EventEmitter, NgModule, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { EventService } from '../../../service/event.service';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DataService } from '../../../service/data.service';
 
 @Component({
   selector: 'app-addeventform',
@@ -18,7 +18,7 @@ export class AddeventformComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private eventService: EventService,
+    private dataService: DataService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<AddeventformComponent>,
   ) {
@@ -37,7 +37,7 @@ export class AddeventformComponent {
       this.openSnackBar('Please ensure all fields are filled out correctly. (Cannot select a past date)');
       return;
     }
-    this.eventService.addEvent(this.form.value).subscribe(
+    this.dataService.addEvent(this.form.value).subscribe(
       (response: any) => {
         console.log(response);
         this.form.reset();

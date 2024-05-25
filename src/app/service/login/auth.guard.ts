@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { AuthService } from './auth.service';
+import { DataService } from '../data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminAuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     // Check if the user is logged in
-    const isLoggedIn = this.authService.isLoggedIn();
+    const isLoggedIn = this.dataService.isLoggedIn();
 
     // If the user is logged in, prevent access to the admin login page
     if (state.url.startsWith('/admin/login') && isLoggedIn) {

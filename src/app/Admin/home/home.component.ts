@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { Chart, registerables } from 'chart.js';
-import { EventService } from '../../service/event.service';
-import { HomeService } from '../../service/home.service';
+import { DataService } from '../../service/data.service';
+
 Chart.register(...registerables);
 
 @Component({
@@ -22,7 +22,7 @@ export class HomeComponent {
   mostParticipatedEventCount = 0;
 
 
-  constructor(private eventService: EventService, private homeService: HomeService) {}
+  constructor(private  dataService: DataService) {}
 
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class HomeComponent {
   }
 
   renderChart() {
-    this.eventService.getEventsWithParticipantCounts().subscribe(events => {
+    this.dataService.getEventsWithParticipantCounts().subscribe(events => {
       const labels = events.map(event => event.event_name);
       const participants = events.map(event => event.participant_count);
       const colors = this.generateRandomColors(events.length); // Generate random colors
@@ -71,9 +71,9 @@ export class HomeComponent {
 
   private async fetchData(): Promise<void> {
     try {
-      const participantResponse = await this.homeService.getParticipantCount().toPromise();
-      const eventResponse = await this.homeService.getEventCount().toPromise();
-      const mostParticipatedEventResponse = await this.homeService.getMostParticipatedEvent().toPromise();
+      const participantResponse = await this.dataService.getParticipantCount().toPromise();
+      const eventResponse = await this.dataService.getEventCount().toPromise();
+      const mostParticipatedEventResponse = await this.dataService.getMostParticipatedEvent().toPromise();
 
       console.log('Participant Response:', participantResponse);
       console.log('Event Response:', eventResponse);

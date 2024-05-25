@@ -1,3 +1,4 @@
+/* Base Styles */
 .heading {
     padding-left: 40px;
     padding-top: 20px;
@@ -131,4 +132,238 @@
 .event-organizer {
     margin-top: 5px;
     font-size: 15px;
+}
+
+/* Media Queries */
+
+/* Small Mobile Devices (Portrait) */
+@media (max-width: 320px) {
+    .heading {
+        font-size: 20px;
+        padding-left: 10px;
+    }
+    .button {
+        width: 70px;
+        padding: 5px 10px;
+        bottom: 10px;
+        right: 10px;
+    }
+    .search-bar {
+        width: 90%;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+    .search-bar input[type="text"] {
+        width: calc(100% - 50px);
+        margin-right: 0;
+    }
+    .search-bar button {
+        width: 50px;
+        padding: 5px;
+        margin-left: 5px;
+    }
+    .container {
+        padding: 20px 10px;
+        max-width: 100%; /* Ensures container is centered */
+        justify-content: center;
+    }
+    .mat-card {
+        left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    .mat-card-header {
+        font-size: 16px;
+    }
+    .mat-card-title {
+        font-size: 18px;
+    }
+    .mat-card-content p {
+        font-size: 14px;
+    }
+    .event-name {
+        font-size: 14px;
+    }
+    .bold-text {
+        font-size: 12px;
+    }
+    .event-date,
+    .event-location,
+    .event-organizer {
+        font-size: 12px;
+    }
+}
+
+/* Large Mobile Devices (Portrait) */
+@media (max-width: 480px) {
+    .heading {
+        font-size: 22px;
+        padding-left: 20px;
+    }
+    .button {
+        width: 80px;
+        padding: 6px 12px;
+        bottom: 12px;
+        right: 12px;
+    }
+    .search-bar {
+        width: 90%;
+        margin-left: 15px;
+        margin-top: 12px;
+    }
+    .search-bar input[type="text"] {
+        width: calc(100% - 60px);
+        margin-right: 0;
+    }
+    .search-bar button {
+        width: 50px;
+        padding: 6px;
+        margin-left: 5px;
+    }
+    .container {
+        padding: 25px 12px;
+        max-width: 100%; /* Ensures container is centered */
+        justify-content: center;
+    }
+    .mat-card {
+        left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    .mat-card-header {
+        font-size: 18px;
+    }
+    .mat-card-title {
+        font-size: 20px;
+    }
+    .mat-card-content p {
+        font-size: 16px;
+    }
+    .event-name {
+        font-size: 16px;
+    }
+    .bold-text {
+        font-size: 14px;
+    }
+    .event-date,
+    .event-location,
+    .event-organizer {
+        font-size: 14px;
+    }
+}
+
+/* Small Tablets (Portrait) */
+@media (max-width: 600px) {
+    .heading {
+        font-size: 24px;
+        padding-left: 25px;
+    }
+    .button {
+        width: 85px;
+        padding: 7px 14px;
+        bottom: 15px;
+        right: 15px;
+    }
+    .search-bar {
+        width: 80%;
+        margin-left: 20px;
+        margin-top: 15px;
+    }
+    .search-bar input[type="text"] {
+        width: calc(100% - 70px);
+        margin-right: 0;
+    }
+    .search-bar button {
+        width: 60px;
+        padding: 7px;
+        margin-left: 5px;
+    }
+    .container {
+        padding: 30px 15px;
+        max-width: 100%; /* Ensures container is centered */
+        justify-content: center;
+    }
+    .mat-card {
+        left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    .mat-card-header {
+        font-size: 20px;
+    }
+    .mat-card-title {
+        font-size: 22px;
+    }
+    .mat-card-content p {
+        font-size: 18px;
+    }
+    .event-name {
+        font-size: 18px;
+    }
+    .bold-text {
+        font-size: 16px;
+    }
+    .event-date,
+    .event-location,
+    .event-organizer {
+        font-size: 16px;
+    }
+}
+
+/* Large Tablets and Small Laptops (Landscape) */
+@media (max-width: 768px) {
+    .heading {
+        font-size: 26px;
+        padding-left: 30px;
+    }
+    .button {
+        width: 90px;
+        padding: 8px 16px;
+        bottom: 18px;
+        right: 18px;
+    }
+    .search-bar {
+        width: 75%;
+        margin-left: 25px;
+        margin-top: 18px;
+    }
+    .search-bar input[type="text"] {
+        width: calc(100% - 70px);
+        margin-right: 0;
+    }
+    .search-bar button {
+        width: 60px;
+        padding: 8px;
+        margin-left: 5px;
+    }
+    .container {
+        padding: 35px 18px;
+        max-width: 100%; /* Ensures container is centered */
+        justify-content: center;
+    }
+    .mat-card {
+        left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    .mat-card-header {
+        font-size: 20px;
+    }
+    .mat-card-title {
+        font-size: 22px;
+    }
+    .mat-card-content p {
+        font-size: 18px;
+    }
+    .event-name {
+        font-size: 18px;
+    }
+    .bold-text {
+        font-size: 16px;
+    }
+    .event-date,
+    .event-location,
+    .event-organizer {
+        font-size: 16px;
+    }
 }
